@@ -3909,11 +3909,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sebek\\source\\repos\\SportConnect\\SportConnect.API\\SportConnect.API.csproj",
+      "projectUniqueName": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\SportConnect.API.csproj",
       "projectName": "SportConnect.API",
-      "projectPath": "C:\\Users\\Sebek\\source\\repos\\SportConnect\\SportConnect.API\\SportConnect.API.csproj",
+      "projectPath": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\SportConnect.API.csproj",
       "packagesPath": "C:\\Users\\Sebek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sebek\\source\\repos\\SportConnect\\SportConnect.API\\obj\\",
+      "outputPath": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
