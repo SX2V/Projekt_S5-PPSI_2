@@ -18,5 +18,7 @@ namespace SportConnect.API.Models
 
         [Range(0, 100, ErrorMessage = "Search radius must be between 0 and 100 kilometers.")]
         public int SearchRadiusKm { get; set; } = 0;
+        public ICollection<UserSport> UserSports { get; set; } = new List<UserSport>();
+
     }
 }

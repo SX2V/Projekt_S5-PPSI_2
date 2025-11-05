@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SportConnect.API.Data;
@@ -11,9 +12,11 @@ using SportConnect.API.Data;
 namespace SportConnect.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251105152223_AddSportAndUserSport")]
+    partial class AddSportAndUserSport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,35 +24,6 @@ namespace SportConnect.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("SportConnect.API.Models.MatchRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("FromUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SportId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ToUserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SportId");
-
-                    b.ToTable("MatchRequests");
-                });
 
             modelBuilder.Entity("SportConnect.API.Models.Sport", b =>
                 {
@@ -111,17 +85,6 @@ namespace SportConnect.API.Migrations
                     b.HasIndex("SportId");
 
                     b.ToTable("UserSports");
-                });
-
-            modelBuilder.Entity("SportConnect.API.Models.MatchRequest", b =>
-                {
-                    b.HasOne("SportConnect.API.Models.Sport", "Sport")
-                        .WithMany()
-                        .HasForeignKey("SportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sport");
                 });
 
             modelBuilder.Entity("SportConnect.API.Models.UserSport", b =>
