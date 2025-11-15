@@ -163,6 +163,7 @@ C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.Build.Locator.dll
@@ -190,6 +191,12 @@ C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Npgsql.dll
@@ -203,6 +210,7 @@ C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -213,6 +221,7 @@ C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.Composition.Runtime.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.Composition.TypedParts.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.IO.Pipelines.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\bin\Debug\net8.0\System.Text.Json.dll
@@ -300,7 +309,6 @@ C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SportConnect.API.props
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SportConnect.API.props
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportCon.06AB955A.Up2Date
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportConnect.API.dll
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\refint\SportConnect.API.dll

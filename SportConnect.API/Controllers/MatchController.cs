@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
@@ -18,6 +19,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpPost("request")]
+        [Authorize]
         public async Task<IActionResult> SendMatchRequest([FromBody] MatchRequestDto dto)
         {
             var fromUser = await _context.Users.FindAsync(dto.FromUserId);
@@ -40,6 +42,7 @@ namespace SportConnect.API.Controllers
             return Ok(request.Id);
         }
         [HttpGet("incoming")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<MatchRequestViewDto>>> GetIncomingRequests([FromQuery] Guid userId)
         {
             var requests = await _context.MatchRequests
@@ -61,6 +64,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpGet("outgoing")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<MatchRequestViewDto>>> GetOutgoingRequests([FromQuery] Guid userId)
         {
             var requests = await _context.MatchRequests
@@ -81,6 +85,7 @@ namespace SportConnect.API.Controllers
             return Ok(requests);
         }
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateMatchRequestStatus(Guid id, [FromBody] MatchRequestStatusDto dto)
         {
             var request = await _context.MatchRequests.FindAsync(id);
@@ -95,6 +100,41 @@ namespace SportConnect.API.Controllers
             await _context.SaveChangesAsync();
 
             return Ok($"Match request {id} updated to '{dto.Status}'.");
+        }
+        [HttpGet("history")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<MatchRequestViewDto>>> GetAcceptedRequests([FromQuery] Guid userId)
+        {
+            var requests = await _context.MatchRequests
+                .Where(r => (r.FromUserId == userId || r.ToUserId == userId) && r.Status == "Accepted")
+                .Include(r => r.Sport)
+                .Select(r => new MatchRequestViewDto
+                {
+                    Id = r.Id,
+                    FromUserId = r.FromUserId,
+                    ToUserId = r.ToUserId,
+                    SportId = r.SportId,
+                    SportName = r.Sport.Name ?? string.Empty,
+                    Status = r.Status,
+                    CreatedAt = r.CreatedAt
+                })
+                .ToListAsync();
+
+            return Ok(requests);
+        }
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteMatchRequest(Guid id)
+        {
+            var request = await _context.MatchRequests.FindAsync(id);
+
+            if (request == null)
+                return NotFound("Match request not found.");
+
+            _context.MatchRequests.Remove(request);
+            await _context.SaveChangesAsync();
+
+            return Ok($"Match request {id} has been deleted.");
         }
 
     }

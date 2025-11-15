@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Models;
@@ -23,6 +24,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Sport>> CreateSport(Sport sport)
         {
             _context.Sports.Add(sport);
@@ -31,6 +33,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteSport(Guid id)
         {
             var sport = await _context.Sports.FindAsync(id);
@@ -44,5 +47,4 @@ namespace SportConnect.API.Controllers
             return NoContent();
         }
     }
-
 }

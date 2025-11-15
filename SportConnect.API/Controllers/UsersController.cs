@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
@@ -19,6 +20,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> CreateUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
@@ -39,6 +41,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<User>> GetUserById(Guid id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -52,6 +55,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -68,6 +72,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] User updatedUser)
         {
             if (!ModelState.IsValid)
@@ -93,6 +98,7 @@ namespace SportConnect.API.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PatchUser(Guid id, [FromBody] JsonElement updates)
         {
             var user = await _context.Users.FindAsync(id);
@@ -127,6 +133,7 @@ namespace SportConnect.API.Controllers
             return Ok(user);
         }
         [HttpPost("{id}/sports")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignSportsToUser(Guid id, AssignSportsDto dto)
         {
             var user = await _context.Users
@@ -154,7 +161,9 @@ namespace SportConnect.API.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
         [HttpGet("{id}/sports")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserSportDto>>> GetUserSports(Guid id)
         {
             var user = await _context.Users
@@ -176,6 +185,7 @@ namespace SportConnect.API.Controllers
             return Ok(sports);
         }
         [HttpGet("{id}/assigned-sports")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserSportDto>>> GetUserAssignedSports(Guid id)
         {
             var user = await _context.Users
@@ -197,10 +207,11 @@ namespace SportConnect.API.Controllers
             return Ok(sports);
         }
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserMatchDto>>> GetUsersBySport(
-    [FromQuery] Guid sportId,
-    [FromQuery] bool? isAvailableNow,
-    [FromQuery] int? maxSearchRadiusKm)
+        [FromQuery] Guid sportId,
+        [FromQuery] bool? isAvailableNow,
+        [FromQuery] int? maxSearchRadiusKm)
         {
             if (sportId == Guid.Empty)
                 return BadRequest("Invalid sportId.");
@@ -228,7 +239,9 @@ namespace SportConnect.API.Controllers
 
             return Ok(users);
         }
+
         [HttpGet("match")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserMatchDto>>> GetMatches([FromQuery] Guid userId)
         {
             var currentUser = await _context.Users
