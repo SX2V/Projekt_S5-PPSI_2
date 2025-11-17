@@ -18,10 +18,15 @@ namespace SportConnect.API.Models
 
         [Range(0, 100, ErrorMessage = "Search radius must be between 0 and 100 kilometers.")]
         public int SearchRadiusKm { get; set; } = 0;
+
+        [Range(0, 120, ErrorMessage = "Age must be between 0 and 120.")]
+        public int? Age { get; set; }
+        [MaxLength(250, ErrorMessage = "The maximum length for 'description' is 250 characters.")]
+        public string? Description { get; set; }
         public ICollection<UserSport> UserSports { get; set; } = new List<UserSport>();
         public string PasswordHash { get; set; } = string.Empty;
-
         public string Role { get; set; } = "User";
+        public bool IsBlocked { get; set; } = false;
 
     }
 }

@@ -52,6 +52,9 @@ namespace SportConnect.API.Controllers
             if (user == null)
                 return Unauthorized("Invalid credentials.");
 
+            if (user.IsBlocked)
+                return Unauthorized("User is blocked.");
+
             var result = _hasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
             if (result != PasswordVerificationResult.Success)
                 return Unauthorized("Invalid credentials.");

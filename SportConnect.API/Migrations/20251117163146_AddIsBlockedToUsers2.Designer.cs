@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SportConnect.API.Data;
@@ -11,9 +12,11 @@ using SportConnect.API.Data;
 namespace SportConnect.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251117163146_AddIsBlockedToUsers2")]
+    partial class AddIsBlockedToUsers2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,13 +81,6 @@ namespace SportConnect.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("Age")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -123,9 +119,6 @@ namespace SportConnect.API.Migrations
 
                     b.Property<Guid>("SportId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("TypicalDistanceKm")
-                        .HasColumnType("integer");
 
                     b.HasKey("UserId", "SportId");
 

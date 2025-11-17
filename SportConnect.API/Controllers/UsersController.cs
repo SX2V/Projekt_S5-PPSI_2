@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace SportConnect.API.Controllers
@@ -206,6 +207,7 @@ namespace SportConnect.API.Controllers
 
             return Ok(sports);
         }
+
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<UserMatchDto>>> GetUsersBySport(
@@ -270,6 +272,166 @@ namespace SportConnect.API.Controllers
                 .ToListAsync();
 
             return Ok(matches);
+        }
+
+        [HttpPatch("{id}/block")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> BlockUser(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound();
+
+            user.IsBlocked = true;
+            await _context.SaveChangesAsync();
+
+            return Ok($"User {id} has been blocked.");
+        }
+
+        [HttpPatch("{id}/unblock")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UnblockUser(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound();
+
+            user.IsBlocked = false;
+            await _context.SaveChangesAsync();
+
+            return Ok($"User {id} has been unblocked.");
+        }
+
+        [HttpPatch("me/profile")]
+        [Authorize]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileDto dto)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            if (!string.IsNullOrEmpty(dto.Name)) user.Name = dto.Name;
+            if (!string.IsNullOrEmpty(dto.Email)) user.Email = dto.Email;
+            if (dto.Age.HasValue) user.Age = dto.Age.Value;
+            if (!string.IsNullOrEmpty(dto.Description)) user.Description = dto.Description;
+
+            await _context.SaveChangesAsync();
+            return Ok("Profile updated.");
+        }
+
+        [HttpPost("me/sports")]
+        [Authorize]
+        public async Task<IActionResult> AddSport(AddSportDto dto)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var user = await _context.Users
+                .Include(u => u.UserSports)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+                return NotFound();
+
+            var sport = await _context.Sports.FindAsync(dto.SportId);
+            if (sport == null)
+                return NotFound("Sport not found.");
+
+            if (user.UserSports.Any(us => us.SportId == dto.SportId))
+                return BadRequest("Sport already assigned to user.");
+
+            user.UserSports.Add(new UserSport
+            {
+                UserId = user.Id,
+                SportId = sport.Id,
+                TypicalDistanceKm = dto.TypicalDistanceKm ?? 0
+            });
+
+            await _context.SaveChangesAsync();
+            return Ok("Sport added to profile.");
+        }
+        [HttpDelete("me/sports/{sportId}")]
+        [Authorize]
+        public async Task<IActionResult> RemoveSport(Guid sportId)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var userSport = await _context.UserSports
+                .FirstOrDefaultAsync(us => us.UserId == userId && us.SportId == sportId);
+
+            if (userSport == null)
+                return NotFound("Sport not assigned to user.");
+
+            _context.UserSports.Remove(userSport);
+            await _context.SaveChangesAsync();
+
+            return Ok("Sport removed from profile.");
+        }
+        [HttpGet("me/sports")]
+        [Authorize]
+        public async Task<IActionResult> GetMySports()
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var user = await _context.Users
+                .Include(u => u.UserSports)
+                .ThenInclude(us => us.Sport)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+                return NotFound();
+
+            var sports = user.UserSports.Select(us => new
+            {
+                us.SportId,
+                SportName = us.Sport.Name,
+                us.TypicalDistanceKm
+            });
+
+            return Ok(sports);
+        }
+        [HttpPatch("me/sports/{sportId}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateSportDistance(Guid sportId, UpdateSportDistanceDto dto)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var userSport = await _context.UserSports
+                .FirstOrDefaultAsync(us => us.UserId == userId && us.SportId == sportId);
+
+            if (userSport == null)
+                return NotFound("Sport not assigned to user.");
+
+            userSport.TypicalDistanceKm = dto.TypicalDistanceKm;
+            await _context.SaveChangesAsync();
+
+            return Ok("Sport distance updated.");
         }
 
     }
