@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
+using System.Security.Claims;
 
 namespace SportConnect.API.Controllers
 {
@@ -135,6 +136,72 @@ namespace SportConnect.API.Controllers
             await _context.SaveChangesAsync();
 
             return Ok($"Match request {id} has been deleted.");
+        }
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> GetMyMatches()
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var me = await _context.Users
+                .Include(u => u.UserSports)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (me == null)
+                return NotFound("User not found.");
+
+            var mySportIds = me.UserSports.Select(us => us.SportId).ToHashSet();
+
+            var candidates = await _context.Users
+                .Where(u => u.Id != me.Id && u.IsAvailableNow)
+                .Include(u => u.UserSports)
+                .ToListAsync();
+
+            var results = candidates
+                .Select(u =>
+                {
+                    var candidateSportIds = u.UserSports.Select(us => us.SportId).ToHashSet();
+                    var sharedSports = mySportIds.Intersect(candidateSportIds).ToList();
+
+                    if (sharedSports.Count == 0)
+                        return null;
+
+                    var distanceKm = HaversineDistanceKm(me.Latitude, me.Longitude, u.Latitude, u.Longitude);
+
+                    if (distanceKm > me.SearchRadiusKm)
+                        return null;
+
+                    return new
+                    {
+                        u.Id,
+                        u.Name,
+                        DistanceKm = Math.Round(distanceKm, 2),
+                        SharedSportIds = sharedSports
+                    };
+                })
+                .Where(x => x != null)
+                .ToList();
+
+            return Ok(results);
+        }
+        private static double HaversineDistanceKm(double lat1, double lon1, double lat2, double lon2)
+        {
+            const double R = 6371.0;
+            double ToRad(double angle) => Math.PI * angle / 180.0;
+
+            var dLat = ToRad(lat2 - lat1);
+            var dLon = ToRad(lon2 - lon1);
+            var a =
+                Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(ToRad(lat1)) * Math.Cos(ToRad(lat2)) *
+                Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return R * c;
         }
 
     }

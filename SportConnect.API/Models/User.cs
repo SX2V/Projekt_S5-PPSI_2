@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SportConnect.API.Models
 {
@@ -21,12 +23,22 @@ namespace SportConnect.API.Models
 
         [Range(0, 120, ErrorMessage = "Age must be between 0 and 120.")]
         public int? Age { get; set; }
+
         [MaxLength(250, ErrorMessage = "The maximum length for 'description' is 250 characters.")]
         public string? Description { get; set; }
+
         public ICollection<UserSport> UserSports { get; set; } = new List<UserSport>();
+
         public string PasswordHash { get; set; } = string.Empty;
+
         public string Role { get; set; } = "User";
+
         public bool IsBlocked { get; set; } = false;
 
+        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 and 90.")]
+        public double Latitude { get; set; } = 0;
+
+        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180.")]
+        public double Longitude { get; set; } = 0;
     }
 }

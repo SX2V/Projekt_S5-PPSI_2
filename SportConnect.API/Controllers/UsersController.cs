@@ -433,6 +433,28 @@ namespace SportConnect.API.Controllers
 
             return Ok("Sport distance updated.");
         }
+        [HttpPatch("me/location")]
+        [Authorize]
+        public async Task<IActionResult> UpdateLocation(UpdateLocationDto dto)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized("Invalid token.");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user identifier.");
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            user.Latitude = dto.Latitude;
+            user.Longitude = dto.Longitude;
+            user.SearchRadiusKm = dto.SearchRadiusKm;
+
+            await _context.SaveChangesAsync();
+            return Ok("Location updated.");
+        }
 
     }
 }
