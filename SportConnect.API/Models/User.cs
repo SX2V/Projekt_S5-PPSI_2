@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SportConnect.API.Models
 {
+    public enum UserRole { User, Admin }
     public class User
     {
         public Guid Id { get; set; }
@@ -29,9 +31,10 @@ namespace SportConnect.API.Models
 
         public ICollection<UserSport> UserSports { get; set; } = new List<UserSport>();
 
+        [JsonIgnore]
         public string PasswordHash { get; set; } = string.Empty;
 
-        public string Role { get; set; } = "User";
+        public UserRole Role { get; set; } = UserRole.User;
 
         public bool IsBlocked { get; set; } = false;
 

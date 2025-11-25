@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.4",
+  "openapi": "3.0.1",
   "info": {
     "title": "SportConnect.API",
     "version": "1.0"
@@ -31,7 +31,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       }
@@ -62,7 +62,19 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -93,7 +105,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       }
@@ -107,6 +119,7 @@
           {
             "name": "userId",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -115,7 +128,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -155,6 +168,7 @@
           {
             "name": "userId",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -163,7 +177,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -204,6 +218,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -231,7 +246,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       },
@@ -244,6 +259,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -252,7 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       }
@@ -266,6 +282,7 @@
           {
             "name": "userId",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -274,7 +291,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -305,6 +322,18 @@
         }
       }
     },
+    "/api/Match/me": {
+      "get": {
+        "tags": [
+          "Match"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Sports": {
       "get": {
         "tags": [
@@ -312,7 +341,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -367,7 +396,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -399,6 +428,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -407,7 +437,127 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/TrainingRequests": {
+      "post": {
+        "tags": [
+          "TrainingRequests"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTrainingRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTrainingRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTrainingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/TrainingRequests/{id}": {
+      "patch": {
+        "tags": [
+          "TrainingRequests"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTrainingRequestStatusDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTrainingRequestStatusDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTrainingRequestStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TrainingRequests"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/TrainingRequests/me/sent": {
+      "get": {
+        "tags": [
+          "TrainingRequests"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/TrainingRequests/me/received": {
+      "get": {
+        "tags": [
+          "TrainingRequests"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -438,7 +588,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -467,6 +617,7 @@
           {
             "name": "sportId",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -475,6 +626,7 @@
           {
             "name": "isAvailableNow",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "boolean"
             }
@@ -482,6 +634,7 @@
           {
             "name": "maxSearchRadiusKm",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -490,7 +643,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -531,6 +684,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -539,7 +693,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -569,6 +723,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -577,7 +732,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       },
@@ -590,6 +745,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -617,7 +773,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       },
@@ -630,6 +786,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -651,7 +808,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       }
@@ -666,6 +823,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -693,7 +851,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         }
       },
@@ -706,6 +864,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -714,7 +873,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -755,6 +914,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "style": "simple",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -763,7 +923,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -803,6 +963,7 @@
           {
             "name": "userId",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -811,7 +972,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -841,10 +1002,246 @@
           }
         }
       }
+    },
+    "/api/Users/{id}/block": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/unblock": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/me/profile": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/me/sports": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSportDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSportDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/me/sports/{sportId}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "sportId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "sportId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSportDistanceDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSportDistanceDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSportDistanceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/me/location": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AddSportDto": {
+        "required": [
+          "sportId"
+        ],
+        "type": "object",
+        "properties": {
+          "sportId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "typicalDistanceKm": {
+            "maximum": 500,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AssignSportsDto": {
         "type": "object",
         "properties": {
@@ -855,6 +1252,16 @@
               "format": "uuid"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTrainingRequestDto": {
+        "type": "object",
+        "properties": {
+          "receiverId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -949,6 +1356,10 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -978,6 +1389,80 @@
             "items": {
               "$ref": "#/components/schemas/UserSport"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateLocationDto": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "maximum": 90,
+            "minimum": -90,
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "maximum": 180,
+            "minimum": -180,
+            "type": "number",
+            "format": "double"
+          },
+          "searchRadiusKm": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProfileDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "age": {
+            "maximum": 120,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateSportDistanceDto": {
+        "type": "object",
+        "properties": {
+          "typicalDistanceKm": {
+            "maximum": 500,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTrainingRequestStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -1013,6 +1498,18 @@
             "type": "integer",
             "format": "int32"
           },
+          "age": {
+            "maximum": 120,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 250,
+            "type": "string",
+            "nullable": true
+          },
           "userSports": {
             "type": "array",
             "items": {
@@ -1023,6 +1520,25 @@
           "passwordHash": {
             "type": "string",
             "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "isBlocked": {
+            "type": "boolean"
+          },
+          "latitude": {
+            "maximum": 90,
+            "minimum": -90,
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "maximum": 180,
+            "minimum": -180,
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -1062,6 +1578,12 @@
           "user": {
             "$ref": "#/components/schemas/User"
           },
+          "typicalDistanceKm": {
+            "maximum": 500,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
           "sportId": {
             "type": "string",
             "format": "uuid"
@@ -1095,6 +1617,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter 'Bearer' [space] and then your token",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

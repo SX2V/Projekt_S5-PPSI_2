@@ -30,11 +30,15 @@ namespace SportConnect.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
+            var role = Enum.TryParse<UserRole>(dto.Role, true, out var parsedRole)
+                ? parsedRole
+                : UserRole.User;
+
             var user = new User
             {
                 Email = dto.Email,
                 Name = dto.Name,
-                Role = dto.Role
+                Role = role
             };
 
             user.PasswordHash = _hasher.HashPassword(user, dto.Password);
@@ -67,10 +71,10 @@ namespace SportConnect.API.Controllers
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
-                new Claim(ClaimTypes.Role, user.Role ?? "User") 
-            };
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
+        new Claim(ClaimTypes.Role, user.Role.ToString())
+    };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -84,21 +88,28 @@ namespace SportConnect.API.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
         [HttpGet("me")]
         [Authorize]
         public IActionResult GetCurrentUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var email = User.FindFirstValue(ClaimTypes.Email);
-            var role = User.FindFirstValue(ClaimTypes.Role);
+            var roleString = User.FindFirstValue(ClaimTypes.Role);
+
+            var role = Enum.TryParse<UserRole>(roleString, true, out var parsedRole)
+                ? parsedRole
+                : UserRole.User;
 
             return Ok(new
             {
                 UserId = userId,
                 Email = email,
-                Role = role
+                Role = role.ToString()
             });
         }
+
+
 
     }
 }

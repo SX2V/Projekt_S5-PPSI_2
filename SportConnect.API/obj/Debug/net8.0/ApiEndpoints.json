@@ -17,6 +17,16 @@
   },
   {
     "ContainingType": "SportConnect.API.Controllers.AuthController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/auth/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "api/auth/register",
     "HttpMethod": "POST",
@@ -122,6 +132,16 @@
   },
   {
     "ContainingType": "SportConnect.API.Controllers.MatchController",
+    "Method": "GetMyMatches",
+    "RelativePath": "api/Match/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.MatchController",
     "Method": "GetOutgoingRequests",
     "RelativePath": "api/Match/outgoing",
     "HttpMethod": "GET",
@@ -222,6 +242,79 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.TrainingRequestsController",
+    "Method": "Create",
+    "RelativePath": "api/TrainingRequests",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CreateTrainingRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.TrainingRequestsController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/TrainingRequests/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "UpdateTrainingRequestStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.TrainingRequestsController",
+    "Method": "GetById",
+    "RelativePath": "api/TrainingRequests/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.TrainingRequestsController",
+    "Method": "GetMyReceived",
+    "RelativePath": "api/TrainingRequests/me/received",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.TrainingRequestsController",
+    "Method": "GetMySent",
+    "RelativePath": "api/TrainingRequests/me/sent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -398,6 +491,22 @@
   },
   {
     "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "BlockUser",
+    "RelativePath": "api/Users/{id}/block",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
     "Method": "AssignSportsToUser",
     "RelativePath": "api/Users/{id}/sports",
     "HttpMethod": "POST",
@@ -445,6 +554,22 @@
   },
   {
     "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "UnblockUser",
+    "RelativePath": "api/Users/{id}/unblock",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
     "Method": "GetMatches",
     "RelativePath": "api/Users/match",
     "HttpMethod": "GET",
@@ -468,5 +593,100 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "UpdateLocation",
+    "RelativePath": "api/Users/me/location",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "SportConnect.API.Dtos.UpdateLocationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Users/me/profile",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "SportConnect.API.Dtos.UpdateProfileDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "AddSport",
+    "RelativePath": "api/Users/me/sports",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "SportConnect.API.Dtos.AddSportDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "GetMySports",
+    "RelativePath": "api/Users/me/sports",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "RemoveSport",
+    "RelativePath": "api/Users/me/sports/{sportId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sportId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SportConnect.API.Controllers.UsersController",
+    "Method": "UpdateSportDistance",
+    "RelativePath": "api/Users/me/sports/{sportId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sportId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "SportConnect.API.Dtos.UpdateSportDistanceDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
