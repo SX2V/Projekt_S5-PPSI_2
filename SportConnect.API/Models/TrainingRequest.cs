@@ -15,5 +15,7 @@ namespace SportConnect.API.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public string Status { get; set; } = "Pending";
+
+        public DateTime? RespondedAt { get; set; }
     }
 }

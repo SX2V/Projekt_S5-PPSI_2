@@ -70,10 +70,13 @@ namespace SportConnect.API.Controllers
                 return BadRequest("Status must be either Accepted or Rejected.");
 
             request.Status = dto.Status;
+            request.RespondedAt = DateTime.UtcNow;
+
             await _context.SaveChangesAsync();
 
             return Ok(request);
         }
+
 
         [HttpGet("{id}")]
         [Authorize]

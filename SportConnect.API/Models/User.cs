@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace SportConnect.API.Models
@@ -34,6 +35,7 @@ namespace SportConnect.API.Models
         [JsonIgnore]
         public string PasswordHash { get; set; } = string.Empty;
 
+        [Column(TypeName = "varchar(20)")]
         public UserRole Role { get; set; } = UserRole.User;
 
         public bool IsBlocked { get; set; } = false;
