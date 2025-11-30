@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
+using SportConnect.API.Services;
 using System.Security.Claims;
 
 namespace SportConnect.API.Controllers
@@ -13,16 +14,22 @@ namespace SportConnect.API.Controllers
     public class MatchController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IActionLogger _actionLogger;
 
-        public MatchController(AppDbContext context)
+        public MatchController(AppDbContext context, IActionLogger actionLogger)
         {
             _context = context;
+            _actionLogger = actionLogger;
         }
 
         [HttpPost("request")]
         [Authorize]
         public async Task<IActionResult> SendMatchRequest([FromBody] MatchRequestDto dto)
         {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var fromUserId))
+                return Unauthorized();
+
             var fromUser = await _context.Users.FindAsync(dto.FromUserId);
             var toUser = await _context.Users.FindAsync(dto.ToUserId);
             var sport = await _context.Sports.FindAsync(dto.SportId);
@@ -40,8 +47,11 @@ namespace SportConnect.API.Controllers
             _context.MatchRequests.Add(request);
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(fromUserId, $"user {fromUserId} sent match request to {dto.ToUserId} for sport {dto.SportId}");
+
             return Ok(request.Id);
         }
+
         [HttpGet("incoming")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MatchRequestViewDto>>> GetIncomingRequests([FromQuery] Guid userId)
@@ -60,6 +70,8 @@ namespace SportConnect.API.Controllers
                     CreatedAt = r.CreatedAt
                 })
                 .ToListAsync();
+
+            await _actionLogger.LogAsync(userId, $"user {userId} viewed incoming match requests");
 
             return Ok(requests);
         }
@@ -83,12 +95,19 @@ namespace SportConnect.API.Controllers
                 })
                 .ToListAsync();
 
+            await _actionLogger.LogAsync(userId, $"user {userId} viewed outgoing match requests");
+
             return Ok(requests);
         }
+
         [HttpPatch("{id}")]
         [Authorize]
         public async Task<IActionResult> UpdateMatchRequestStatus(Guid id, [FromBody] MatchRequestStatusDto dto)
         {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
             var request = await _context.MatchRequests.FindAsync(id);
 
             if (request == null)
@@ -100,8 +119,11 @@ namespace SportConnect.API.Controllers
             request.Status = dto.Status;
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(userId, $"user {userId} updated match request {id} to {dto.Status}");
+
             return Ok($"Match request {id} updated to '{dto.Status}'.");
         }
+
         [HttpGet("history")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<MatchRequestViewDto>>> GetAcceptedRequests([FromQuery] Guid userId)
@@ -121,12 +143,19 @@ namespace SportConnect.API.Controllers
                 })
                 .ToListAsync();
 
+            await _actionLogger.LogAsync(userId, $"user {userId} viewed match history");
+
             return Ok(requests);
         }
+
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteMatchRequest(Guid id)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             var request = await _context.MatchRequests.FindAsync(id);
 
             if (request == null)
@@ -135,8 +164,11 @@ namespace SportConnect.API.Controllers
             _context.MatchRequests.Remove(request);
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(adminId, $"admin deleted match request {id}");
+
             return Ok($"Match request {id} has been deleted.");
         }
+
         [HttpGet("me")]
         [Authorize]
         public async Task<IActionResult> GetMyMatches()
@@ -187,6 +219,8 @@ namespace SportConnect.API.Controllers
                 .Where(x => x != null)
                 .ToList();
 
+            await _actionLogger.LogAsync(userId, $"user {userId} viewed own matches");
+
             return Ok(results);
         }
         private static double HaversineDistanceKm(double lat1, double lon1, double lat2, double lon2)
@@ -203,7 +237,5 @@ namespace SportConnect.API.Controllers
             var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             return R * c;
         }
-
     }
-
 }

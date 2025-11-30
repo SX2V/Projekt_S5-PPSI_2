@@ -17,6 +17,17 @@ namespace SportConnect.API.Controllers
         {
             _context = context;
         }
+        private async Task LogAction(Guid userId, string action)
+        {
+            var log = new ActionLog
+            {
+                UserId = userId,
+                Action = action,
+                Timestamp = DateTime.UtcNow
+            };
+            _context.ActionLogs.Add(log);
+            await _context.SaveChangesAsync();
+        }
 
         [HttpPost]
         [Authorize]
@@ -44,6 +55,8 @@ namespace SportConnect.API.Controllers
 
             _context.TrainingRequests.Add(request);
             await _context.SaveChangesAsync();
+
+            await LogAction(senderId, $"sent training request to {dto.ReceiverId}");
 
             return CreatedAtAction(nameof(GetById), new { id = request.Id }, request);
         }
@@ -74,6 +87,8 @@ namespace SportConnect.API.Controllers
 
             await _context.SaveChangesAsync();
 
+            await LogAction(currentUserId, $"responded to training request {id} with status {dto.Status}");
+
             return Ok(request);
         }
 
@@ -97,6 +112,8 @@ namespace SportConnect.API.Controllers
             if (request.SenderId != currentUserId && request.ReceiverId != currentUserId)
                 return Forbid("You are not authorized to view this request.");
 
+            await LogAction(currentUserId, $"viewed training request {id}");
+
             return Ok(request);
         }
 
@@ -114,6 +131,8 @@ namespace SportConnect.API.Controllers
                 .OrderByDescending(tr => tr.CreatedAt)
                 .ToListAsync();
 
+            await LogAction(currentUserId, "viewed own sent training requests");
+
             return Ok(requests);
         }
 
@@ -130,6 +149,9 @@ namespace SportConnect.API.Controllers
                 .Include(tr => tr.Sender)
                 .OrderByDescending(tr => tr.CreatedAt)
                 .ToListAsync();
+
+            await LogAction(currentUserId, "viewed own received training requests");
+
 
             return Ok(requests);
         }

@@ -12,6 +12,7 @@ namespace SportConnect.API.Data
         public DbSet<UserSport> UserSports { get; set; }
         public DbSet<MatchRequest> MatchRequests { get; set; }
         public DbSet<TrainingRequest> TrainingRequests { get; set; }
+        public DbSet<ActionLog> ActionLogs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

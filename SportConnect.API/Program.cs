@@ -10,6 +10,7 @@ using SportConnect.API.Data;
 using SportConnect.API.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.OpenApi.Models;
+using SportConnect.API.Services;
 
 
 namespace SportConnect.API
@@ -41,6 +42,8 @@ namespace SportConnect.API
                 });
 
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+            builder.Services.AddScoped<IActionLogger, ActionLogger>();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

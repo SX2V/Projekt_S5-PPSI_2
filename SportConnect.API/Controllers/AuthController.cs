@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
+using SportConnect.API.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -19,12 +20,14 @@ namespace SportConnect.API.Controllers
         private readonly AppDbContext _context;
         private readonly IPasswordHasher<User> _hasher;
         private readonly IConfiguration _config;
+        private readonly IActionLogger _actionLogger;
 
-        public AuthController(AppDbContext context, IPasswordHasher<User> hasher, IConfiguration config)
+        public AuthController(AppDbContext context, IPasswordHasher<User> hasher, IConfiguration config, IActionLogger actionLogger)
         {
             _context = context;
             _hasher = hasher;
             _config = config;
+            _actionLogger = actionLogger;
         }
 
         [HttpPost("register")]
@@ -46,6 +49,8 @@ namespace SportConnect.API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(user.Id, $"user {user.Id} registered with role {role}");
+
             return Ok("User registered.");
         }
 
@@ -64,6 +69,9 @@ namespace SportConnect.API.Controllers
                 return Unauthorized("Invalid credentials.");
 
             var token = GenerateJwtToken(user);
+
+            await _actionLogger.LogAsync(user.Id, $"user {user.Id} logged in");
+
             return Ok(new { token });
         }
 
@@ -71,10 +79,10 @@ namespace SportConnect.API.Controllers
         {
             var claims = new[]
             {
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
-        new Claim(ClaimTypes.Role, user.Role.ToString())
-    };
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -101,6 +109,8 @@ namespace SportConnect.API.Controllers
                 ? parsedRole
                 : UserRole.User;
 
+            _actionLogger.LogAsync(Guid.Parse(userId!), $"user {userId} viewed own profile");
+
             return Ok(new
             {
                 UserId = userId,
@@ -108,8 +118,5 @@ namespace SportConnect.API.Controllers
                 Role = role.ToString()
             });
         }
-
-
-
     }
 }

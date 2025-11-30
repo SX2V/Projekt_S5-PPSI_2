@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
+using SportConnect.API.Services;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -14,16 +15,22 @@ namespace SportConnect.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IActionLogger _actionLogger;
 
-        public UsersController(AppDbContext context)
+        public UsersController(AppDbContext context, IActionLogger actionLogger)
         {
             _context = context;
+            _actionLogger = actionLogger;
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> CreateUser([FromBody] User user)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -37,6 +44,8 @@ namespace SportConnect.API.Controllers
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(adminId, $"admin created user {user.Id} with email {user.Email}");
 
             return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
         }
@@ -59,6 +68,10 @@ namespace SportConnect.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
@@ -69,6 +82,8 @@ namespace SportConnect.API.Controllers
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(adminId, $"admin deleted user {id}");
+
             return NoContent();
         }
 
@@ -76,6 +91,10 @@ namespace SportConnect.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] User updatedUser)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -95,6 +114,8 @@ namespace SportConnect.API.Controllers
 
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(adminId, $"admin updated user {id}");
+
             return Ok(existingUser);
         }
 
@@ -102,6 +123,10 @@ namespace SportConnect.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PatchUser(Guid id, [FromBody] JsonElement updates)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
@@ -131,12 +156,19 @@ namespace SportConnect.API.Controllers
 
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(adminId, $"admin patched user {id}");
+
             return Ok(user);
         }
+
         [HttpPost("{id}/sports")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignSportsToUser(Guid id, AssignSportsDto dto)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             var user = await _context.Users
                 .Include(u => u.UserSports)
                 .FirstOrDefaultAsync(u => u.Id == id);
@@ -160,6 +192,9 @@ namespace SportConnect.API.Controllers
             }
 
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(adminId, $"admin assigned sports to user {id}");
+
             return NoContent();
         }
 
@@ -167,6 +202,10 @@ namespace SportConnect.API.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<UserSportDto>>> GetUserSports(Guid id)
         {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var currentUserId))
+                return Unauthorized();
+
             var user = await _context.Users
                 .Include(u => u.UserSports)
                 .ThenInclude(us => us.Sport)
@@ -183,12 +222,19 @@ namespace SportConnect.API.Controllers
                 TypicalDistanceKm = us.Sport.TypicalDistanceKm
             });
 
+            await _actionLogger.LogAsync(currentUserId, $"viewed sports of user {id}");
+
             return Ok(sports);
         }
+
         [HttpGet("{id}/assigned-sports")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<UserSportDto>>> GetUserAssignedSports(Guid id)
         {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var currentUserId))
+                return Unauthorized();
+
             var user = await _context.Users
                 .Include(u => u.UserSports)
                 .ThenInclude(us => us.Sport)
@@ -204,6 +250,8 @@ namespace SportConnect.API.Controllers
                 Description = us.Sport.Description,
                 TypicalDistanceKm = us.Sport.TypicalDistanceKm
             });
+
+            await _actionLogger.LogAsync(currentUserId, $"viewed assigned sports of user {id}");
 
             return Ok(sports);
         }
@@ -211,10 +259,14 @@ namespace SportConnect.API.Controllers
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<UserMatchDto>>> GetUsersBySport(
-        [FromQuery] Guid sportId,
-        [FromQuery] bool? isAvailableNow,
-        [FromQuery] int? maxSearchRadiusKm)
+            [FromQuery] Guid sportId,
+            [FromQuery] bool? isAvailableNow,
+            [FromQuery] int? maxSearchRadiusKm)
         {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var currentUserId))
+                return Unauthorized();
+
             if (sportId == Guid.Empty)
                 return BadRequest("Invalid sportId.");
 
@@ -239,8 +291,11 @@ namespace SportConnect.API.Controllers
                 })
                 .ToListAsync();
 
+            await _actionLogger.LogAsync(currentUserId, $"searched users by sport {sportId}");
+
             return Ok(users);
         }
+
 
         [HttpGet("match")]
         [Authorize]
@@ -271,6 +326,8 @@ namespace SportConnect.API.Controllers
                 })
                 .ToListAsync();
 
+            await _actionLogger.LogAsync(userId, $"viewed matches for user {userId}");
+
             return Ok(matches);
         }
 
@@ -278,12 +335,18 @@ namespace SportConnect.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> BlockUser(Guid id)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             var user = await _context.Users.FindAsync(id);
             if (user == null)
                 return NotFound();
 
             user.IsBlocked = true;
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(adminId, $"admin blocked user {id}");
 
             return Ok($"User {id} has been blocked.");
         }
@@ -292,12 +355,18 @@ namespace SportConnect.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnblockUser(Guid id)
         {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized();
+
             var user = await _context.Users.FindAsync(id);
             if (user == null)
                 return NotFound();
 
             user.IsBlocked = false;
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(adminId, $"admin unblocked user {id}");
 
             return Ok($"User {id} has been unblocked.");
         }
@@ -323,6 +392,9 @@ namespace SportConnect.API.Controllers
             if (!string.IsNullOrEmpty(dto.Description)) user.Description = dto.Description;
 
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(userId, $"user {userId} updated profile");
+
             return Ok("Profile updated.");
         }
 
@@ -359,8 +431,12 @@ namespace SportConnect.API.Controllers
             });
 
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(userId, $"user {userId} added sport {dto.SportId} to profile");
+
             return Ok("Sport added to profile.");
         }
+
         [HttpDelete("me/sports/{sportId}")]
         [Authorize]
         public async Task<IActionResult> RemoveSport(Guid sportId)
@@ -381,8 +457,11 @@ namespace SportConnect.API.Controllers
             _context.UserSports.Remove(userSport);
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(userId, $"user {userId} removed sport {sportId} from profile");
+
             return Ok("Sport removed from profile.");
         }
+
         [HttpGet("me/sports")]
         [Authorize]
         public async Task<IActionResult> GetMySports()
@@ -409,8 +488,11 @@ namespace SportConnect.API.Controllers
                 us.TypicalDistanceKm
             });
 
+            await _actionLogger.LogAsync(userId, $"user {userId} viewed own sports");
+
             return Ok(sports);
         }
+
         [HttpPatch("me/sports/{sportId}")]
         [Authorize]
         public async Task<IActionResult> UpdateSportDistance(Guid sportId, UpdateSportDistanceDto dto)
@@ -431,8 +513,11 @@ namespace SportConnect.API.Controllers
             userSport.TypicalDistanceKm = dto.TypicalDistanceKm;
             await _context.SaveChangesAsync();
 
+            await _actionLogger.LogAsync(userId, $"user {userId} updated distance for sport {sportId} to {dto.TypicalDistanceKm} km");
+
             return Ok("Sport distance updated.");
         }
+
         [HttpPatch("me/location")]
         [Authorize]
         public async Task<IActionResult> UpdateLocation(UpdateLocationDto dto)
@@ -453,8 +538,10 @@ namespace SportConnect.API.Controllers
             user.SearchRadiusKm = dto.SearchRadiusKm;
 
             await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(userId, $"user {userId} updated location to ({dto.Latitude}, {dto.Longitude}) with radius {dto.SearchRadiusKm} km");
+
             return Ok("Location updated.");
         }
-
     }
 }

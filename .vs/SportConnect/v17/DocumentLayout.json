@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\migrations\\20251129172655_addrespondedattotrainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\migrations\\20251129172655_addrespondedattotrainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\models\\trainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\models\\trainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -133,7 +141,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 47,
+          "DockedWidth": 32,
           "SelectedChildIndex": -1,
           "Children": [
             {
@@ -155,9 +163,35 @@
           ]
         },
         {
-          "DockedWidth": 286,
-          "SelectedChildIndex": 9,
+          "DockedWidth": 301,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20251129172655_AddRespondedAtToTrainingRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\20251129172655_AddRespondedAtToTrainingRequest.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Migrations\\20251129172655_AddRespondedAtToTrainingRequest.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\20251129172655_AddRespondedAtToTrainingRequest.cs",
+              "RelativeToolTip": "SportConnect.API\\Migrations\\20251129172655_AddRespondedAtToTrainingRequest.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T17:27:25.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeToolTip": "SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T17:25:07.8Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -168,11 +202,15 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\AdminController.cs",
@@ -184,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "TrainingRequestStatsDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\TrainingRequestStatsDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\TrainingRequestStatsDto.cs",
@@ -196,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "SportConnect.API\\Properties\\launchSettings.json",
@@ -208,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "SportConnect.API.http",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\SportConnect.API.http",
               "RelativeDocumentMoniker": "SportConnect.API\\SportConnect.API.http",
@@ -220,7 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 32,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\appsettings.Development.json",
               "RelativeDocumentMoniker": "SportConnect.API\\appsettings.Development.json",
@@ -232,7 +270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\appsettings.json",
               "RelativeDocumentMoniker": "SportConnect.API\\appsettings.json",
@@ -244,7 +282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "TrainingRequestsController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\TrainingRequestsController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\TrainingRequestsController.cs",
@@ -257,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "CreateTrainingRequestDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
@@ -269,19 +307,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TrainingRequest.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\TrainingRequest.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\TrainingRequest.cs",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\TrainingRequest.cs",
               "RelativeToolTip": "SportConnect.API\\Models\\TrainingRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-24T16:42:32.598Z"
+              "WhenOpened": "2025-11-24T16:42:32.598Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "UpdateLocationDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UpdateLocationDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UpdateLocationDto.cs",
@@ -293,7 +332,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "UpdateSportDistanceDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UpdateSportDistanceDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UpdateSportDistanceDto.cs",
@@ -305,7 +344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "AddSportDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AddSportDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\AddSportDto.cs",
@@ -317,7 +356,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "UpdateProfileDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UpdateProfileDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UpdateProfileDto.cs",
@@ -329,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Program.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Program.cs",
@@ -341,7 +380,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\AuthController.cs",
@@ -353,7 +392,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\LoginDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\LoginDto.cs",
@@ -365,7 +404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\RegisterDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\RegisterDto.cs",
@@ -377,7 +416,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "MatchRequestStatusDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\MatchRequestStatusDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\MatchRequestStatusDto.cs",
@@ -389,7 +428,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "MatchRequestViewDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\MatchRequestViewDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\MatchRequestViewDto.cs",
@@ -401,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "MatchController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\MatchController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\MatchController.cs",
@@ -413,7 +452,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "MatchRequestDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\MatchRequestDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\MatchRequestDto.cs",
@@ -425,7 +464,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "MatchRequest.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\MatchRequest.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\MatchRequest.cs",
@@ -437,7 +476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "UserMatchDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserMatchDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UserMatchDto.cs",
@@ -449,7 +488,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "UserSportDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserSportDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UserSportDto.cs",
@@ -461,7 +500,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "AssignSportsDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AssignSportsDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\AssignSportsDto.cs",
@@ -473,7 +512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "SportsController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\SportsController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\SportsController.cs",
@@ -485,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Data\\AppDbContext.cs",
@@ -497,7 +536,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "UserSport.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\UserSport.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\UserSport.cs",
@@ -509,7 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\User.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\User.cs",
@@ -521,7 +560,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "Sport.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\Sport.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\Sport.cs",
@@ -533,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\UsersController.cs",
