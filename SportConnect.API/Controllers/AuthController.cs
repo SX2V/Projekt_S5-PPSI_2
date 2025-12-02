@@ -21,13 +21,20 @@ namespace SportConnect.API.Controllers
         private readonly IPasswordHasher<User> _hasher;
         private readonly IConfiguration _config;
         private readonly IActionLogger _actionLogger;
+        private readonly IEmailService _emailService;
 
-        public AuthController(AppDbContext context, IPasswordHasher<User> hasher, IConfiguration config, IActionLogger actionLogger)
+        public AuthController(
+            AppDbContext context,
+            IPasswordHasher<User> hasher,
+            IConfiguration config,
+            IActionLogger actionLogger,
+            IEmailService emailService)
         {
             _context = context;
             _hasher = hasher;
             _config = config;
             _actionLogger = actionLogger;
+            _emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -99,7 +106,7 @@ namespace SportConnect.API.Controllers
 
         [HttpGet("me")]
         [Authorize]
-        public IActionResult GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var email = User.FindFirstValue(ClaimTypes.Email);
@@ -109,7 +116,7 @@ namespace SportConnect.API.Controllers
                 ? parsedRole
                 : UserRole.User;
 
-            _actionLogger.LogAsync(Guid.Parse(userId!), $"user {userId} viewed own profile");
+            await _actionLogger.LogAsync(Guid.Parse(userId!), $"user {userId} viewed own profile");
 
             return Ok(new
             {
@@ -118,5 +125,60 @@ namespace SportConnect.API.Controllers
                 Role = role.ToString()
             });
         }
+
+        [HttpPost("request-reset")]
+        public async Task<IActionResult> RequestPasswordReset(RequestPasswordResetDto dto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (user == null)
+                return NotFound("User not found.");
+
+            if (string.IsNullOrWhiteSpace(user.Email))
+                return BadRequest("User email is not valid.");
+
+            var token = Guid.NewGuid().ToString();
+
+            var resetToken = new PasswordResetToken
+            {
+                UserId = user.Id,
+                Token = token,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(15)
+            };
+
+            _context.PasswordResetTokens.Add(resetToken);
+            await _context.SaveChangesAsync();
+
+            var resetLink = $"http://localhost:3000/reset-password?token={token}";
+            await _emailService.SendEmailAsync(
+                user.Email!,
+                "Password Reset",
+                $"Kliknij link aby zresetować hasło: {resetLink}");
+
+            return Ok("Password reset link sent.");
+        }
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
+        {
+            var resetToken = await _context.PasswordResetTokens
+                .FirstOrDefaultAsync(t => t.Token == dto.Token);
+
+            if (resetToken == null || resetToken.ExpiresAt < DateTime.UtcNow)
+                return BadRequest("Invalid or expired token.");
+
+            var user = await _context.Users.FindAsync(resetToken.UserId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            user.PasswordHash = _hasher.HashPassword(user, dto.NewPassword);
+
+            _context.PasswordResetTokens.Remove(resetToken);
+
+            await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(user.Id, $"user {user.Id} reset password");
+
+            return Ok("Password has been reset successfully.");
+        }
+
     }
 }

@@ -45,6 +45,8 @@ namespace SportConnect.API
 
             builder.Services.AddScoped<IActionLogger, ActionLogger>();
 
+            builder.Services.AddScoped<IEmailService, EmailService>();
+
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
