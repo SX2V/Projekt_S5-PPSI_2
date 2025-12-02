@@ -543,5 +543,24 @@ namespace SportConnect.API.Controllers
 
             return Ok("Location updated.");
         }
+
+        //NOWA ZMIANA
+        [HttpPatch("status")]
+        [Authorize]
+        public async Task<IActionResult> UpdateAvailability([FromBody] bool isAvailableNow)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized();
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            user.IsAvailableNow = isAvailableNow;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { user.Id, user.IsAvailableNow });
+        }
     }
 }
