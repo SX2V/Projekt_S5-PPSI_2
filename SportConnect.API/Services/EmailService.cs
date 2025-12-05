@@ -24,10 +24,13 @@ namespace SportConnect.API.Services
             var host = smtpSection["Host"];
             var port = int.Parse(smtpSection["Port"]!);
             var user = smtpSection["User"];
-            var password = smtpSection["Password"];
+            var password = smtpSection["Password"]; 
 
             if (string.IsNullOrWhiteSpace(user))
                 throw new InvalidOperationException("SMTP User (nadawca) nie jest skonfigurowany.");
+
+            if (string.IsNullOrWhiteSpace(password))
+                throw new InvalidOperationException("SMTP Password (hasło aplikacyjne) nie jest skonfigurowane.");
 
             if (string.IsNullOrWhiteSpace(to))
                 throw new ArgumentException("Adres odbiorcy nie może być pusty.", nameof(to));
@@ -38,9 +41,9 @@ namespace SportConnect.API.Services
             message.Subject = subject ?? string.Empty;
             message.Body = new TextPart("plain") { Text = body ?? string.Empty };
 
-            using var client = new MailKit.Net.Smtp.SmtpClient();
+            using var client = new SmtpClient();
             await client.ConnectAsync(host, port, SecureSocketOptions.StartTls);
-            await client.AuthenticateAsync(user, password); // hasło aplikacyjne
+            await client.AuthenticateAsync(user, password); 
             await client.SendAsync(message);
             await client.DisconnectAsync(true);
         }
