@@ -543,5 +543,48 @@ namespace SportConnect.API.Controllers
 
             return Ok("Location updated.");
         }
+        [HttpPost("upload-profile-picture")]
+        [Authorize]
+        public async Task<IActionResult> UploadProfilePicture(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            var allowed = new[] { "image/jpeg", "image/png", "image/webp" };
+            if (!allowed.Contains(file.ContentType))
+                return BadRequest("Unsupported image type.");
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _context.Users.FindAsync(Guid.Parse(userId!));
+            if (user == null) return NotFound("User not found.");
+
+            var root = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var uploadDir = Path.Combine(root, "uploads", "profile-pics");
+            Directory.CreateDirectory(uploadDir);
+
+            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var fileName = $"{user.Id}{ext}";
+            var filePath = Path.Combine(uploadDir, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            user.ProfilePicturePath = $"/uploads/profile-pics/{fileName}";
+            await _context.SaveChangesAsync();
+
+            return Ok(new { path = user.ProfilePicturePath });
+        }
+        [HttpGet("profile-picture-url/{id}")]
+        public async Task<IActionResult> GetProfilePictureUrl(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null || string.IsNullOrEmpty(user.ProfilePicturePath))
+                return NotFound();
+
+            return Ok(new { url = user.ProfilePicturePath });
+        }
+
     }
 }

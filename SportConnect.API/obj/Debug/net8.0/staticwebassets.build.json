@@ -1,12 +1,20 @@
 {
   "Version": 1,
-  "Hash": "SsN1RqF5Mx2vW1/dticqr7uhzh96hDVt5sVmHD64EcE=",
+  "Hash": "fQ9rp4PQ/kW5pdfTAHN7F1y4LOg2pPJ0aTXneV8AD7Y=",
   "Source": "SportConnect.API",
   "BasePath": "_content/SportConnect.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SportConnect.API\\wwwroot",
+      "Source": "SportConnect.API",
+      "ContentRoot": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\",
+      "BasePath": "_content/SportConnect.API",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [],
   "Endpoints": []
 }

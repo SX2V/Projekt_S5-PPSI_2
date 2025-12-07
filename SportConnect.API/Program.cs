@@ -98,6 +98,8 @@ namespace SportConnect.API
 
             app.MapControllers();
 
+            app.UseStaticFiles();
+
             app.Run();
         }
     }
