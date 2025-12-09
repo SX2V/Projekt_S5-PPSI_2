@@ -4,13 +4,13 @@ namespace SportConnect.API.Dtos
 {
     public class UpdateLocationDto
     {
-        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 and 90.")]
+        [Range(-90, 90, ErrorMessage = "UpdateLocationLatitudeRange")]
         public double Latitude { get; set; }
 
-        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180.")]
+        [Range(-180, 180, ErrorMessage = "UpdateLocationLongitudeRange")]
         public double Longitude { get; set; }
 
-        [Range(0, 100, ErrorMessage = "Search radius must be between 0 and 100 kilometers.")]
+        [Range(0, 100, ErrorMessage = "UpdateLocationSearchRadiusRange")]
         public int SearchRadiusKm { get; set; }
     }
 }

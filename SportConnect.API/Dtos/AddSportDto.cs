@@ -5,10 +5,10 @@ namespace SportConnect.API.Dtos
 {
     public class AddSportDto
     {
-        [Required(ErrorMessage = "SportId is required.")]
+        [Required(ErrorMessage = "AddSportIdRequired")]
         public Guid SportId { get; set; }
 
-        [Range(0, 500, ErrorMessage = "Typical distance must be between 0 and 500 km.")]
+        [Range(0, 500, ErrorMessage = "AddSportTypicalDistanceRange")]
         public int? TypicalDistanceKm { get; set; }
     }
 }

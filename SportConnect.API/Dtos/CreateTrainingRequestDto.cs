@@ -1,9 +1,14 @@
-﻿public class CreateTrainingRequestDto
+﻿using SportConnect.API.Models;
+using System.ComponentModel.DataAnnotations;
+
+public class CreateTrainingRequestDto
 {
     public Guid ReceiverId { get; set; }
 }
 
 public class UpdateTrainingRequestStatusDto
 {
-    public string? Status { get; set; }
+    [Required(ErrorMessage = "TrainingRequestStatusRequired")]
+    public TrainingRequestStatus Status { get; set; }
 }
+

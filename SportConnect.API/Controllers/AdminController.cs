@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
@@ -16,11 +17,13 @@ namespace SportConnect.API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IActionLogger _actionLogger;
+        private readonly IStringLocalizer<AdminController> _localizer;
 
-        public AdminController(AppDbContext context, IActionLogger actionLogger)
+        public AdminController(AppDbContext context, IActionLogger actionLogger, IStringLocalizer<AdminController> localizer)
         {
             _context = context;
             _actionLogger = actionLogger;
+            _localizer = localizer;
         }
 
         [HttpGet("statistics")]
@@ -28,7 +31,7 @@ namespace SportConnect.API.Controllers
         {
             var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(adminIdClaim, out var adminId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var now = DateTime.UtcNow;
 
@@ -70,11 +73,11 @@ namespace SportConnect.API.Controllers
         {
             var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(adminIdClaim, out var adminId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var logs = await _context.ActionLogs
                 .OrderByDescending(l => l.Timestamp)
-                .Take(100) 
+                .Take(100)
                 .ToListAsync();
 
             await _actionLogger.LogAsync(adminId, "admin viewed action logs");

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fQ9rp4PQ/kW5pdfTAHN7F1y4LOg2pPJ0aTXneV8AD7Y=",
+  "Hash": "dO9yGih+5q6TE24IQ8jVl/oJUueqZsZNRqnW05Zn9WY=",
   "Source": "SportConnect.API",
   "BasePath": "_content/SportConnect.API",
   "Mode": "Default",
@@ -15,6 +15,214 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\JavaScript.js",
+      "SourceId": "SportConnect.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\",
+      "BasePath": "_content/SportConnect.API",
+      "RelativePath": "JavaScript#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "lddusljpou",
+      "Integrity": "OR+lzyIaPTtTghVFJGEdsRvb1UT6OpDGR6DZrdjHZgk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\JavaScript.js"
+    },
+    {
+      "Identity": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\uploads\\profile-pics\\019a8895-6dbe-7d67-8953-1e00bf44579d.jpg",
+      "SourceId": "SportConnect.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\",
+      "BasePath": "_content/SportConnect.API",
+      "RelativePath": "uploads/profile-pics/019a8895-6dbe-7d67-8953-1e00bf44579d#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "i1qmjiwyoy",
+      "Integrity": "qtcS8Kp8956ch226KHzdxrHP7I7DjySN4Tnv+RIxKZQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\profile-pics\\019a8895-6dbe-7d67-8953-1e00bf44579d.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "JavaScript.js",
+      "AssetFile": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\JavaScript.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "278"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OR+lzyIaPTtTghVFJGEdsRvb1UT6OpDGR6DZrdjHZgk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 09 Dec 2025 18:17:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OR+lzyIaPTtTghVFJGEdsRvb1UT6OpDGR6DZrdjHZgk="
+        }
+      ]
+    },
+    {
+      "Route": "JavaScript.lddusljpou.js",
+      "AssetFile": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\JavaScript.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "278"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OR+lzyIaPTtTghVFJGEdsRvb1UT6OpDGR6DZrdjHZgk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 09 Dec 2025 18:17:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lddusljpou"
+        },
+        {
+          "Name": "label",
+          "Value": "JavaScript.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OR+lzyIaPTtTghVFJGEdsRvb1UT6OpDGR6DZrdjHZgk="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profile-pics/019a8895-6dbe-7d67-8953-1e00bf44579d.i1qmjiwyoy.jpg",
+      "AssetFile": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\uploads\\profile-pics\\019a8895-6dbe-7d67-8953-1e00bf44579d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42283"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtcS8Kp8956ch226KHzdxrHP7I7DjySN4Tnv+RIxKZQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 07 Dec 2025 16:40:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "i1qmjiwyoy"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profile-pics/019a8895-6dbe-7d67-8953-1e00bf44579d.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtcS8Kp8956ch226KHzdxrHP7I7DjySN4Tnv+RIxKZQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profile-pics/019a8895-6dbe-7d67-8953-1e00bf44579d.jpg",
+      "AssetFile": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\uploads\\profile-pics\\019a8895-6dbe-7d67-8953-1e00bf44579d.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42283"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtcS8Kp8956ch226KHzdxrHP7I7DjySN4Tnv+RIxKZQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 07 Dec 2025 16:40:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtcS8Kp8956ch226KHzdxrHP7I7DjySN4Tnv+RIxKZQ="
+        }
+      ]
+    }
+  ]
 }

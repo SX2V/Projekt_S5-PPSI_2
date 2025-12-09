@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using SportConnect.API.Data;
 using SportConnect.API.Models;
+using SportConnect.API.Dtos;
 
 namespace SportConnect.API.Controllers
 {
@@ -12,11 +14,14 @@ namespace SportConnect.API.Controllers
     public class TrainingRequestsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IStringLocalizer<TrainingRequestsController> _localizer;
 
-        public TrainingRequestsController(AppDbContext context)
+        public TrainingRequestsController(AppDbContext context, IStringLocalizer<TrainingRequestsController> localizer)
         {
             _context = context;
+            _localizer = localizer;
         }
+
         private async Task LogAction(Guid userId, string action)
         {
             var log = new ActionLog
@@ -35,14 +40,14 @@ namespace SportConnect.API.Controllers
         {
             var senderIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(senderIdClaim, out var senderId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             if (senderId == dto.ReceiverId)
-                return BadRequest("You cannot send a training request to yourself.");
+                return BadRequest(new { message = _localizer["CannotSendRequestToYourself"] });
 
             var receiverExists = await _context.Users.AnyAsync(u => u.Id == dto.ReceiverId);
             if (!receiverExists)
-                return NotFound("Receiver user not found.");
+                return NotFound(new { message = _localizer["ReceiverNotFound"] });
 
             var request = new TrainingRequest
             {
@@ -50,7 +55,7 @@ namespace SportConnect.API.Controllers
                 SenderId = senderId,
                 ReceiverId = dto.ReceiverId,
                 CreatedAt = DateTime.UtcNow,
-                Status = "Pending"
+                Status = TrainingRequestStatus.Pending
             };
 
             _context.TrainingRequests.Add(request);
@@ -67,20 +72,20 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(userIdClaim, out var currentUserId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var request = await _context.TrainingRequests.FindAsync(id);
             if (request == null)
-                return NotFound("Training request not found.");
+                return NotFound(new { message = _localizer["TrainingRequestNotFound"] });
 
             if (request.ReceiverId != currentUserId)
-                return Forbid("Only the receiver can respond to the request.");
+                return Forbid(_localizer["OnlyReceiverCanRespond"]);
 
-            if (request.Status != "Pending")
-                return Conflict("The request has already been processed.");
+            if (request.Status != TrainingRequestStatus.Pending)
+                return Conflict(new { message = _localizer["TrainingRequestAlreadyProcessed"] });
 
-            if (dto.Status != "Accepted" && dto.Status != "Rejected")
-                return BadRequest("Status must be either Accepted or Rejected.");
+            if (dto.Status != TrainingRequestStatus.Accepted && dto.Status != TrainingRequestStatus.Rejected)
+                return BadRequest(new { message = _localizer["TrainingRequestInvalidStatus"] });
 
             request.Status = dto.Status;
             request.RespondedAt = DateTime.UtcNow;
@@ -92,14 +97,13 @@ namespace SportConnect.API.Controllers
             return Ok(request);
         }
 
-
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetById(Guid id)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(userIdClaim, out var currentUserId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var request = await _context.TrainingRequests
                 .Include(tr => tr.Sender)
@@ -107,10 +111,10 @@ namespace SportConnect.API.Controllers
                 .FirstOrDefaultAsync(tr => tr.Id == id);
 
             if (request == null)
-                return NotFound("Training request not found.");
+                return NotFound(new { message = _localizer["TrainingRequestNotFound"] });
 
             if (request.SenderId != currentUserId && request.ReceiverId != currentUserId)
-                return Forbid("You are not authorized to view this request.");
+                return Forbid(_localizer["NotAuthorizedToViewRequest"]);
 
             await LogAction(currentUserId, $"viewed training request {id}");
 
@@ -123,7 +127,7 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(userIdClaim, out var currentUserId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var requests = await _context.TrainingRequests
                 .Where(tr => tr.SenderId == currentUserId)
@@ -142,7 +146,7 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(userIdClaim, out var currentUserId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var requests = await _context.TrainingRequests
                 .Where(tr => tr.ReceiverId == currentUserId)
@@ -151,7 +155,6 @@ namespace SportConnect.API.Controllers
                 .ToListAsync();
 
             await LogAction(currentUserId, "viewed own received training requests");
-
 
             return Ok(requests);
         }

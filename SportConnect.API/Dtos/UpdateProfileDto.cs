@@ -4,16 +4,15 @@ namespace SportConnect.API.Dtos
 {
     public class UpdateProfileDto
     {
-        [MaxLength(50, ErrorMessage = "The maximum length for 'name' is 50 characters.")]
+        [MaxLength(50, ErrorMessage = "UpdateProfileNameMaxLength")]
         public string? Name { get; set; }
 
-        [EmailAddress(ErrorMessage = "Invalid email address format.")]
+        [EmailAddress(ErrorMessage = "UpdateProfileEmailInvalid")]
         public string? Email { get; set; }
-
-        [Range(0, 120, ErrorMessage = "Age must be between 0 and 120.")]
+        [Range(0, 120, ErrorMessage = "UpdateProfileAgeRange")]
         public int? Age { get; set; }
 
-        [MaxLength(250, ErrorMessage = "The maximum length for 'description' is 250 characters.")]
+        [MaxLength(250, ErrorMessage = "UpdateProfileDescriptionMaxLength")]
         public string? Description { get; set; }
     }
 }

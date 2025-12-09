@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
+using Microsoft.Extensions.Localization;
 
 namespace SportConnect.API.Services
 {
@@ -12,10 +13,12 @@ namespace SportConnect.API.Services
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _config;
+        private readonly IStringLocalizer<EmailService> _localizer;
 
-        public EmailService(IConfiguration config)
+        public EmailService(IConfiguration config, IStringLocalizer<EmailService> localizer)
         {
             _config = config;
+            _localizer = localizer;
         }
 
         public async Task SendEmailAsync(string to, string subject, string body)
@@ -24,16 +27,16 @@ namespace SportConnect.API.Services
             var host = smtpSection["Host"];
             var port = int.Parse(smtpSection["Port"]!);
             var user = smtpSection["User"];
-            var password = smtpSection["Password"]; 
+            var password = smtpSection["Password"];
 
             if (string.IsNullOrWhiteSpace(user))
-                throw new InvalidOperationException("SMTP User (nadawca) nie jest skonfigurowany.");
+                throw new InvalidOperationException(_localizer["SmtpUserNotConfigured"]);
 
             if (string.IsNullOrWhiteSpace(password))
-                throw new InvalidOperationException("SMTP Password (hasło aplikacyjne) nie jest skonfigurowane.");
+                throw new InvalidOperationException(_localizer["SmtpPasswordNotConfigured"]);
 
             if (string.IsNullOrWhiteSpace(to))
-                throw new ArgumentException("Adres odbiorcy nie może być pusty.", nameof(to));
+                throw new ArgumentException(_localizer["RecipientAddressEmpty"], nameof(to));
 
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("SportConnect", user));
@@ -43,7 +46,7 @@ namespace SportConnect.API.Services
 
             using var client = new SmtpClient();
             await client.ConnectAsync(host, port, SecureSocketOptions.StartTls);
-            await client.AuthenticateAsync(user, password); 
+            await client.AuthenticateAsync(user, password);
             await client.SendAsync(message);
             await client.DisconnectAsync(true);
         }

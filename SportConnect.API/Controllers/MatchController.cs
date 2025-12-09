@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
@@ -15,11 +16,13 @@ namespace SportConnect.API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IActionLogger _actionLogger;
+        private readonly IStringLocalizer<MatchController> _localizer;
 
-        public MatchController(AppDbContext context, IActionLogger actionLogger)
+        public MatchController(AppDbContext context, IActionLogger actionLogger, IStringLocalizer<MatchController> localizer)
         {
             _context = context;
             _actionLogger = actionLogger;
+            _localizer = localizer;
         }
 
         [HttpPost("request")]
@@ -28,20 +31,22 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(userIdClaim, out var fromUserId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var fromUser = await _context.Users.FindAsync(dto.FromUserId);
             var toUser = await _context.Users.FindAsync(dto.ToUserId);
             var sport = await _context.Sports.FindAsync(dto.SportId);
 
             if (fromUser == null || toUser == null || sport == null)
-                return BadRequest("Invalid user or sport ID.");
+                return BadRequest(new { message = _localizer["InvalidUserOrSportId"] });
 
             var request = new MatchRequest
             {
                 FromUserId = dto.FromUserId,
                 ToUserId = dto.ToUserId,
-                SportId = dto.SportId
+                SportId = dto.SportId,
+                Status = MatchRequestStatus.Pending,
+                CreatedAt = DateTime.UtcNow
             };
 
             _context.MatchRequests.Add(request);
@@ -66,7 +71,7 @@ namespace SportConnect.API.Controllers
                     ToUserId = r.ToUserId,
                     SportId = r.SportId,
                     SportName = r.Sport.Name ?? string.Empty,
-                    Status = r.Status,
+                    Status = r.Status.ToString(),
                     CreatedAt = r.CreatedAt
                 })
                 .ToListAsync();
@@ -90,7 +95,7 @@ namespace SportConnect.API.Controllers
                     ToUserId = r.ToUserId,
                     SportId = r.SportId,
                     SportName = r.Sport.Name ?? string.Empty,
-                    Status = r.Status,
+                    Status = r.Status.ToString(),
                     CreatedAt = r.CreatedAt
                 })
                 .ToListAsync();
@@ -106,22 +111,22 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var request = await _context.MatchRequests.FindAsync(id);
 
             if (request == null)
-                return NotFound("Match request not found.");
+                return NotFound(new { message = _localizer["MatchRequestNotFound"] });
 
-            if (dto.Status != "Accepted" && dto.Status != "Rejected")
-                return BadRequest("Invalid status. Use 'Accepted' or 'Rejected'.");
+            if (dto.Status != MatchRequestStatus.Accepted && dto.Status != MatchRequestStatus.Rejected)
+                return BadRequest(new { message = _localizer["InvalidMatchRequestStatus"] });
 
             request.Status = dto.Status;
             await _context.SaveChangesAsync();
 
             await _actionLogger.LogAsync(userId, $"user {userId} updated match request {id} to {dto.Status}");
 
-            return Ok($"Match request {id} updated to '{dto.Status}'.");
+            return Ok(new { message = _localizer["MatchRequestUpdated", id, dto.Status] });
         }
 
         [HttpGet("history")]
@@ -129,7 +134,7 @@ namespace SportConnect.API.Controllers
         public async Task<ActionResult<IEnumerable<MatchRequestViewDto>>> GetAcceptedRequests([FromQuery] Guid userId)
         {
             var requests = await _context.MatchRequests
-                .Where(r => (r.FromUserId == userId || r.ToUserId == userId) && r.Status == "Accepted")
+                .Where(r => (r.FromUserId == userId || r.ToUserId == userId) && r.Status == MatchRequestStatus.Accepted)
                 .Include(r => r.Sport)
                 .Select(r => new MatchRequestViewDto
                 {
@@ -138,7 +143,7 @@ namespace SportConnect.API.Controllers
                     ToUserId = r.ToUserId,
                     SportId = r.SportId,
                     SportName = r.Sport.Name ?? string.Empty,
-                    Status = r.Status,
+                    Status = r.Status.ToString(),
                     CreatedAt = r.CreatedAt
                 })
                 .ToListAsync();
@@ -154,19 +159,19 @@ namespace SportConnect.API.Controllers
         {
             var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(adminIdClaim, out var adminId))
-                return Unauthorized();
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var request = await _context.MatchRequests.FindAsync(id);
 
             if (request == null)
-                return NotFound("Match request not found.");
+                return NotFound(new { message = _localizer["MatchRequestNotFound"] });
 
             _context.MatchRequests.Remove(request);
             await _context.SaveChangesAsync();
 
             await _actionLogger.LogAsync(adminId, $"admin deleted match request {id}");
 
-            return Ok($"Match request {id} has been deleted.");
+            return Ok(new { message = _localizer["MatchRequestDeleted", id] });
         }
 
         [HttpGet("me")]
@@ -175,17 +180,17 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var me = await _context.Users
                 .Include(u => u.UserSports)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (me == null)
-                return NotFound("User not found.");
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             var mySportIds = me.UserSports.Select(us => us.SportId).ToHashSet();
 
@@ -223,6 +228,7 @@ namespace SportConnect.API.Controllers
 
             return Ok(results);
         }
+
         private static double HaversineDistanceKm(double lat1, double lon1, double lat2, double lon2)
         {
             const double R = 6371.0;

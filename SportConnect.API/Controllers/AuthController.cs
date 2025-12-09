@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
@@ -22,19 +23,22 @@ namespace SportConnect.API.Controllers
         private readonly IConfiguration _config;
         private readonly IActionLogger _actionLogger;
         private readonly IEmailService _emailService;
+        private readonly IStringLocalizer<AuthController> _localizer;
 
         public AuthController(
             AppDbContext context,
             IPasswordHasher<User> hasher,
             IConfiguration config,
             IActionLogger actionLogger,
-            IEmailService emailService)
+            IEmailService emailService,
+            IStringLocalizer<AuthController> localizer)
         {
             _context = context;
             _hasher = hasher;
             _config = config;
             _actionLogger = actionLogger;
             _emailService = emailService;
+            _localizer = localizer;
         }
 
         [HttpPost("register")]
@@ -58,7 +62,7 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(user.Id, $"user {user.Id} registered with role {role}");
 
-            return Ok("User registered.");
+            return Ok(new { message = _localizer["UserRegistered"] });
         }
 
         [HttpPost("login")]
@@ -66,14 +70,14 @@ namespace SportConnect.API.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (user == null)
-                return Unauthorized("Invalid credentials.");
+                return Unauthorized(new { message = _localizer["InvalidCredentials"] });
 
             if (user.IsBlocked)
-                return Unauthorized("User is blocked.");
+                return Unauthorized(new { message = _localizer["UserBlocked"] });
 
             var result = _hasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
             if (result != PasswordVerificationResult.Success)
-                return Unauthorized("Invalid credentials.");
+                return Unauthorized(new { message = _localizer["InvalidCredentials"] });
 
             var token = GenerateJwtToken(user);
 
@@ -131,10 +135,10 @@ namespace SportConnect.API.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (user == null)
-                return NotFound("User not found.");
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             if (string.IsNullOrWhiteSpace(user.Email))
-                return BadRequest("User email is not valid.");
+                return BadRequest(new { message = _localizer["InvalidUserEmail"] });
 
             var token = Guid.NewGuid().ToString();
 
@@ -151,11 +155,12 @@ namespace SportConnect.API.Controllers
             var resetLink = $"http://localhost:3000/reset-password?token={token}";
             await _emailService.SendEmailAsync(
                 user.Email!,
-                "Password Reset",
-                $"Kliknij link aby zresetować hasło: {resetLink}");
+                _localizer["PasswordResetSubject"],
+                _localizer["PasswordResetBody", resetLink]);
 
-            return Ok("Password reset link sent.");
+            return Ok(new { message = _localizer["PasswordResetLinkSent"] });
         }
+
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
         {
@@ -163,11 +168,11 @@ namespace SportConnect.API.Controllers
                 .FirstOrDefaultAsync(t => t.Token == dto.Token);
 
             if (resetToken == null || resetToken.ExpiresAt < DateTime.UtcNow)
-                return BadRequest("Invalid or expired token.");
+                return BadRequest(new { message = _localizer["InvalidOrExpiredToken"] });
 
             var user = await _context.Users.FindAsync(resetToken.UserId);
             if (user == null)
-                return NotFound("User not found.");
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             user.PasswordHash = _hasher.HashPassword(user, dto.NewPassword);
 
@@ -177,8 +182,7 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(user.Id, $"user {user.Id} reset password");
 
-            return Ok("Password has been reset successfully.");
+            return Ok(new { message = _localizer["PasswordResetSuccess"] });
         }
-
     }
 }

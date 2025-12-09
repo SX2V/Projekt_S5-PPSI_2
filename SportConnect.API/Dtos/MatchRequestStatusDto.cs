@@ -1,8 +1,12 @@
-﻿namespace SportConnect.API.Dtos
+﻿using SportConnect.API.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace SportConnect.API.Dtos
 {
     public class MatchRequestStatusDto
     {
-        public string Status { get; set; } = string.Empty;
+        [Required(ErrorMessage = "MatchRequestStatusRequired")]
+        public MatchRequestStatus Status { get; set; }
     }
 
 }

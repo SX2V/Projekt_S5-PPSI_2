@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
@@ -16,11 +17,12 @@ namespace SportConnect.API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IActionLogger _actionLogger;
-
-        public UsersController(AppDbContext context, IActionLogger actionLogger)
+        private readonly IStringLocalizer<UsersController> _localizer;
+        public UsersController(AppDbContext context, IActionLogger actionLogger, IStringLocalizer<UsersController> localizer)
         {
             _context = context;
             _actionLogger = actionLogger;
+            _localizer = localizer;
         }
 
         [HttpPost]
@@ -39,7 +41,7 @@ namespace SportConnect.API.Controllers
             bool emailExists = await _context.Users.AnyAsync(u => u.Email == user.Email);
             if (emailExists)
             {
-                return Conflict(new { message = "Email already exists." });
+                return Conflict(new { message = _localizer["UserEmailAlreadyExists"] });
             }
 
             _context.Users.Add(user);
@@ -160,7 +162,7 @@ namespace SportConnect.API.Controllers
 
             return Ok(user);
         }
-
+    
         [HttpPost("{id}/sports")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignSportsToUser(Guid id, AssignSportsDto dto)
@@ -182,7 +184,7 @@ namespace SportConnect.API.Controllers
             {
                 var sportExists = await _context.Sports.AnyAsync(s => s.Id == sportId);
                 if (!sportExists)
-                    return BadRequest($"Sport with ID {sportId} does not exist.");
+                    return BadRequest(new { message = _localizer["SportNotFound", sportId] });
 
                 user.UserSports.Add(new UserSport
                 {
@@ -268,7 +270,7 @@ namespace SportConnect.API.Controllers
                 return Unauthorized();
 
             if (sportId == Guid.Empty)
-                return BadRequest("Invalid sportId.");
+                return BadRequest(new { message = _localizer["InvalidSportId"] });
 
             var query = _context.Users
                 .Include(u => u.UserSports)
@@ -306,7 +308,7 @@ namespace SportConnect.API.Controllers
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (currentUser == null)
-                return NotFound("User not found.");
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             var sportIds = currentUser.UserSports.Select(us => us.SportId).ToList();
 
@@ -330,7 +332,7 @@ namespace SportConnect.API.Controllers
 
             return Ok(matches);
         }
-
+        
         [HttpPatch("{id}/block")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> BlockUser(Guid id)
@@ -348,7 +350,7 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(adminId, $"admin blocked user {id}");
 
-            return Ok($"User {id} has been blocked.");
+            return Ok(new { message = _localizer["UserBlocked", id] });
         }
 
         [HttpPatch("{id}/unblock")]
@@ -368,7 +370,7 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(adminId, $"admin unblocked user {id}");
 
-            return Ok($"User {id} has been unblocked.");
+            return Ok(new { message = _localizer["UserUnblocked", id] });
         }
 
         [HttpPatch("me/profile")]
@@ -377,14 +379,14 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var user = await _context.Users.FindAsync(userId);
             if (user == null)
-                return NotFound();
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             if (!string.IsNullOrEmpty(dto.Name)) user.Name = dto.Name;
             if (!string.IsNullOrEmpty(dto.Email)) user.Email = dto.Email;
@@ -395,7 +397,7 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(userId, $"user {userId} updated profile");
 
-            return Ok("Profile updated.");
+            return Ok(new { message = _localizer["ProfileUpdated"] });
         }
 
         [HttpPost("me/sports")]
@@ -404,24 +406,24 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var user = await _context.Users
                 .Include(u => u.UserSports)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
-                return NotFound();
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             var sport = await _context.Sports.FindAsync(dto.SportId);
             if (sport == null)
-                return NotFound("Sport not found.");
+                return NotFound(new { message = _localizer["SportNotFound"] });
 
             if (user.UserSports.Any(us => us.SportId == dto.SportId))
-                return BadRequest("Sport already assigned to user.");
+                return BadRequest(new { message = _localizer["SportAlreadyAssigned"] });
 
             user.UserSports.Add(new UserSport
             {
@@ -434,7 +436,7 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(userId, $"user {userId} added sport {dto.SportId} to profile");
 
-            return Ok("Sport added to profile.");
+            return Ok(new { message = _localizer["SportAddedToProfile"] });
         }
 
         [HttpDelete("me/sports/{sportId}")]
@@ -443,35 +445,35 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var userSport = await _context.UserSports
                 .FirstOrDefaultAsync(us => us.UserId == userId && us.SportId == sportId);
 
             if (userSport == null)
-                return NotFound("Sport not assigned to user.");
+                return NotFound(new { message = _localizer["SportNotAssigned"] });
 
             _context.UserSports.Remove(userSport);
             await _context.SaveChangesAsync();
 
             await _actionLogger.LogAsync(userId, $"user {userId} removed sport {sportId} from profile");
 
-            return Ok("Sport removed from profile.");
+            return Ok(new { message = _localizer["SportRemovedFromProfile"] });
         }
-
+        
         [HttpGet("me/sports")]
         [Authorize]
         public async Task<IActionResult> GetMySports()
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var user = await _context.Users
                 .Include(u => u.UserSports)
@@ -479,7 +481,7 @@ namespace SportConnect.API.Controllers
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
-                return NotFound();
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             var sports = user.UserSports.Select(us => new
             {
@@ -499,23 +501,23 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var userSport = await _context.UserSports
                 .FirstOrDefaultAsync(us => us.UserId == userId && us.SportId == sportId);
 
             if (userSport == null)
-                return NotFound("Sport not assigned to user.");
+                return NotFound(new { message = _localizer["SportNotAssigned"] });
 
             userSport.TypicalDistanceKm = dto.TypicalDistanceKm;
             await _context.SaveChangesAsync();
 
             await _actionLogger.LogAsync(userId, $"user {userId} updated distance for sport {sportId} to {dto.TypicalDistanceKm} km");
 
-            return Ok("Sport distance updated.");
+            return Ok(new { message = _localizer["SportDistanceUpdated"] });
         }
 
         [HttpPatch("me/location")]
@@ -524,14 +526,14 @@ namespace SportConnect.API.Controllers
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userIdClaim))
-                return Unauthorized("Invalid token.");
+                return Unauthorized(new { message = _localizer["InvalidToken"] });
 
             if (!Guid.TryParse(userIdClaim, out var userId))
-                return Unauthorized("Invalid user identifier.");
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
             var user = await _context.Users.FindAsync(userId);
             if (user == null)
-                return NotFound("User not found.");
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             user.Latitude = dto.Latitude;
             user.Longitude = dto.Longitude;
@@ -541,22 +543,23 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(userId, $"user {userId} updated location to ({dto.Latitude}, {dto.Longitude}) with radius {dto.SearchRadiusKm} km");
 
-            return Ok("Location updated.");
+            return Ok(new { message = _localizer["LocationUpdated"] });
         }
         [HttpPost("upload-profile-picture")]
         [Authorize]
         public async Task<IActionResult> UploadProfilePicture(IFormFile file)
         {
             if (file == null || file.Length == 0)
-                return BadRequest("No file uploaded.");
+                return BadRequest(new { message = _localizer["NoFileUploaded"] });
 
             var allowed = new[] { "image/jpeg", "image/png", "image/webp" };
             if (!allowed.Contains(file.ContentType))
-                return BadRequest("Unsupported image type.");
+                return BadRequest(new { message = _localizer["UnsupportedImageType"] });
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _context.Users.FindAsync(Guid.Parse(userId!));
-            if (user == null) return NotFound("User not found.");
+            if (user == null)
+                return NotFound(new { message = _localizer["UserNotFound"] });
 
             var root = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
             var uploadDir = Path.Combine(root, "uploads", "profile-pics");
@@ -581,7 +584,7 @@ namespace SportConnect.API.Controllers
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null || string.IsNullOrEmpty(user.ProfilePicturePath))
-                return NotFound();
+                return NotFound(new { message = _localizer["UserNotFoundOrNoProfilePicture"] });
 
             return Ok(new { url = user.ProfilePicturePath });
         }

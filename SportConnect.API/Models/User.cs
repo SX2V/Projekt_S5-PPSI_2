@@ -11,23 +11,23 @@ namespace SportConnect.API.Models
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "The 'name' field is required.")]
-        [MaxLength(50, ErrorMessage = "The maximum length for 'name' is 50 characters.")]
+        [Required(ErrorMessage = "UserNameRequired")]
+        [MaxLength(50, ErrorMessage = "UserNameMaxLength")]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "The 'email' field is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email address format.")]
+        [Required(ErrorMessage = "UserEmailRequired")]
+        [EmailAddress(ErrorMessage = "UserEmailInvalid")]
         public string? Email { get; set; }
 
         public bool IsAvailableNow { get; set; } = false;
 
-        [Range(0, 100, ErrorMessage = "Search radius must be between 0 and 100 kilometers.")]
+        [Range(0, 100, ErrorMessage = "UserSearchRadiusRange")]
         public int SearchRadiusKm { get; set; } = 0;
 
-        [Range(0, 120, ErrorMessage = "Age must be between 0 and 120.")]
+        [Range(0, 120, ErrorMessage = "UserAgeRange")]
         public int? Age { get; set; }
 
-        [MaxLength(250, ErrorMessage = "The maximum length for 'description' is 250 characters.")]
+        [MaxLength(250, ErrorMessage = "UserDescriptionMaxLength")]
         public string? Description { get; set; }
 
         public ICollection<UserSport> UserSports { get; set; } = new List<UserSport>();
@@ -40,10 +40,10 @@ namespace SportConnect.API.Models
 
         public bool IsBlocked { get; set; } = false;
 
-        [Range(-90, 90, ErrorMessage = "Latitude must be between -90 and 90.")]
+        [Range(-90, 90, ErrorMessage = "UserLatitudeRange")]
         public double Latitude { get; set; } = 0;
 
-        [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180.")]
+        [Range(-180, 180, ErrorMessage = "UserLongitudeRange")]
         public double Longitude { get; set; } = 0;
         public string? ProfilePicturePath { get; set; }
     }
