@@ -562,5 +562,124 @@ namespace SportConnect.API.Controllers
 
             return Ok(new { user.Id, user.IsAvailableNow });
         }
+
+//do cache
+        builder.Services.AddMemoryCache();
+//do cache
+        public static class CacheKeys
+        {
+            public static string UserSports(Guid userId)
+                => $"user:{userId}:sports";
+        }
+//do cache
+        private readonly IMemoryCache _cache;
+
+        public UsersController(IMemoryCache cache)
+        {
+            _cache = cache;
+        }
+//do cache
+        var cacheKey = CacheKeys.UserSports(userId);
+
+        if (!_cache.TryGetValue(cacheKey, out List<UserSportDto> sports))
+        {
+            sports = await _context.UserSports
+                .Where(us => us.UserId == userId)
+                .Select(us => new UserSportDto
+                {
+                    SportId = us.SportId,
+                    SportName = us.Sport.Name,
+                    TypicalDistanceKm = us.TypicalDistanceKm
+                })
+                .ToListAsync();
+        
+            _cache.Set(cacheKey, sports, TimeSpan.FromMinutes(5));
+        }
+//do cache
+        _cache.Remove(CacheKeys.UserSports(userId));
+
+//do logowania fb
+        "Facebook": {
+          "AppId": "XXX",
+          "AppSecret": "YYY"
+        }
+
+//do logowania fb
+        builder.Services.AddAuthentication()
+            .AddFacebook(options =>
+            {
+                options.AppId = builder.Configuration["Facebook:AppId"];
+                options.AppSecret = builder.Configuration["Facebook:AppSecret"];
+                options.Fields.Add("email");
+            });
+
+//do logowania fb
+        public class FacebookLoginDto
+        {
+            public string AccessToken { get; set; }
+        }
+
+//do logowania fb
+        public class FacebookAuthService
+        {
+            public async Task<FacebookUser> ValidateToken(string accessToken)
+            {
+                var client = new HttpClient();
+                var response = await client.GetAsync(
+                    $"https://graph.facebook.com/me?access_token={accessToken}&fields=id,email,name"
+                );
+        
+                if (!response.IsSuccessStatusCode)
+                    return null;
+        
+                return JsonConvert.DeserializeObject<FacebookUser>(
+                    await response.Content.ReadAsStringAsync()
+                );
+            }
+        }
+
+//do logowania fb
+        public string GenerateToken(User user)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+        
+            // generowanie JWT
+        }
+
+//do logowania fb
+        [ApiController]
+        [Route("auth")]
+        public class AuthController : ControllerBase
+        {
+            private readonly FacebookAuthService _facebookAuth;
+            private readonly JwtService _jwtService;
+        
+            [HttpPost("facebook")]
+            public async Task<IActionResult> FacebookLogin(FacebookLoginDto dto)
+            {
+                var fbUser = await _facebookAuth.ValidateToken(dto.AccessToken);
+                if (fbUser == null)
+                    return Unauthorized();
+        
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == fbUser.Email)
+                    ?? await CreateUser(fbUser);
+        
+                var token = _jwtService.GenerateToken(user);
+        
+                return Ok(new { token });
+            }
+        }
+
+//do logowania fb
+
+        builder.Services.AddScoped<JwtService>();
+        builder.Services.AddScoped<FacebookAuthService>();
+
+
     }
 }
