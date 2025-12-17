@@ -680,6 +680,76 @@ namespace SportConnect.API.Controllers
         builder.Services.AddScoped<JwtService>();
         builder.Services.AddScoped<FacebookAuthService>();
 
+    // NEW
+
+        [HttpPost("facebook")]
+        public async Task<IActionResult> FacebookLogin([FromBody] FacebookLoginDto dto)
+        {
+            // 1. Walidacja tokenu
+            var facebookUser = await _facebookAuthService.ValidateAccessTokenAsync(dto.AccessToken);
+            if (facebookUser == null)
+                return Unauthorized("Invalid Facebook token");
+            
+            // 2. Sprawdź czy użytkownik istnieje
+            var user = await _userRepository.GetByEmailAsync(facebookUser.Email);
+            
+            // 3. Jeśli nie istnieje - utwórz
+            if (user == null)
+            {
+                user = new User
+                {
+                    Email = facebookUser.Email,
+                    Name = facebookUser.Name,
+                    FacebookId = facebookUser.Id,
+                    CreatedAt = DateTime.UtcNow
+                };
+                await _userRepository.CreateAsync(user);
+            }
+            
+            // 4. Wygeneruj JWT
+            var token = _jwtService.GenerateToken(user);
+            
+            return Ok(new { Token = token });
+        }
+
+        // NEW
+
+        [HttpPost("strava")]
+        public async Task<IActionResult> StravaLogin([FromBody] StravaLoginDto dto)
+        {
+            // 1. Wymień code na access token
+            var tokenResponse = await _stravaAuthService.ExchangeCodeForTokenAsync(dto.Code);
+            if (tokenResponse == null)
+                return Unauthorized("Invalid Strava code");
+            
+            var stravaUser = tokenResponse.Athlete;
+            
+            // 2. Sprawdź czy użytkownik istnieje (po email lub StravaId)
+            var user = await _userRepository.GetByStravaIdAsync(stravaUser.Id);
+            if (user == null && !string.IsNullOrEmpty(stravaUser.Email))
+            {
+                user = await _userRepository.GetByEmailAsync(stravaUser.Email);
+            }
+            
+            // 3. Jeśli nie istnieje - utwórz
+            if (user == null)
+            {
+                user = new User
+                {
+                    Email = stravaUser.Email ?? $"strava_{stravaUser.Id}@tinder-sport.com",
+                    Name = $"{stravaUser.Firstname} {stravaUser.Lastname}",
+                    StravaId = stravaUser.Id,
+                    CreatedAt = DateTime.UtcNow
+                };
+                await _userRepository.CreateAsync(user);
+            }
+            
+            // 4. Wygeneruj JWT
+            var token = _jwtService.GenerateToken(user);
+            
+            return Ok(new { Token = token });
+        }
+
 
     }
 }
