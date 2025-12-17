@@ -83,6 +83,26 @@ namespace SportConnect.API
             });
 
 
+
+            // new
+
+            builder.Services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = builder.Configuration["Facebook:AppId"];
+                options.AppSecret = builder.Configuration["Facebook:AppSecret"];
+                options.Scope.Add("email");
+                options.Fields.Add("name");
+                options.Fields.Add("email");
+            });
+        
+            // new
+        
+            builder.Services.AddHttpClient<IFacebookAuthService, FacebookAuthService>();
+        
+            // new
+        
+            builder.Services.AddHttpClient<IStravaAuthService, StravaAuthService>();
+            
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
