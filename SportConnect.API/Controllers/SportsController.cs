@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Caching.Memory;
 using SportConnect.API.Data;
 using SportConnect.API.Models;
 using SportConnect.API.Services;
@@ -16,12 +17,20 @@ namespace SportConnect.API.Controllers
         private readonly AppDbContext _context;
         private readonly IActionLogger _actionLogger;
         private readonly IStringLocalizer<SportsController> _localizer;
+        private readonly IMemoryCache _cache;
 
-        public SportsController(AppDbContext context, IActionLogger actionLogger, IStringLocalizer<SportsController> localizer)
+        private static readonly TimeSpan AllSportsCacheDuration = TimeSpan.FromHours(1);
+
+        public SportsController(
+            AppDbContext context,
+            IActionLogger actionLogger,
+            IStringLocalizer<SportsController> localizer,
+            IMemoryCache cache)
         {
             _context = context;
             _actionLogger = actionLogger;
             _localizer = localizer;
+            _cache = cache;
         }
 
         [HttpGet]
@@ -32,7 +41,13 @@ namespace SportConnect.API.Controllers
             if (!Guid.TryParse(userIdClaim, out var currentUserId))
                 return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
-            var sports = await _context.Sports.ToListAsync();
+            var cacheKey = CacheKeys.AllSports();
+
+            if (!_cache.TryGetValue(cacheKey, out List<Sport>? sports))
+            {
+                sports = await _context.Sports.ToListAsync();
+                _cache.Set(cacheKey, sports, AllSportsCacheDuration);
+            }
 
             await _actionLogger.LogAsync(currentUserId, "viewed all sports");
 
@@ -50,9 +65,36 @@ namespace SportConnect.API.Controllers
             _context.Sports.Add(sport);
             await _context.SaveChangesAsync();
 
+            _cache.Remove(CacheKeys.AllSports());
+
             await _actionLogger.LogAsync(adminId, $"admin created sport {sport.Id} ({sport.Name})");
 
             return CreatedAtAction(nameof(GetAllSports), new { id = sport.Id }, sport);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateSport(Guid id, Sport updatedSport)
+        {
+            var adminIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(adminIdClaim, out var adminId))
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
+
+            var sport = await _context.Sports.FindAsync(id);
+            if (sport == null)
+                return NotFound(new { message = _localizer["SportNotFound"] });
+
+            sport.Name = updatedSport.Name;
+            sport.Description = updatedSport.Description;
+            sport.TypicalDistanceKm = updatedSport.TypicalDistanceKm;
+
+            await _context.SaveChangesAsync();
+
+            _cache.Remove(CacheKeys.AllSports());
+
+            await _actionLogger.LogAsync(adminId, $"admin updated sport {id}");
+
+            return Ok(sport);
         }
 
         [HttpDelete("{id}")]
@@ -65,12 +107,12 @@ namespace SportConnect.API.Controllers
 
             var sport = await _context.Sports.FindAsync(id);
             if (sport == null)
-            {
                 return NotFound(new { message = _localizer["SportNotFound"] });
-            }
 
             _context.Sports.Remove(sport);
             await _context.SaveChangesAsync();
+
+            _cache.Remove(CacheKeys.AllSports());
 
             await _actionLogger.LogAsync(adminId, $"admin deleted sport {id}");
 

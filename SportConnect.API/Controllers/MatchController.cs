@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Caching.Memory;
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
@@ -17,12 +18,15 @@ namespace SportConnect.API.Controllers
         private readonly AppDbContext _context;
         private readonly IActionLogger _actionLogger;
         private readonly IStringLocalizer<MatchController> _localizer;
+        private readonly IMemoryCache _cache;
+        private static readonly TimeSpan MatchesCacheDuration = TimeSpan.FromMinutes(2);
 
-        public MatchController(AppDbContext context, IActionLogger actionLogger, IStringLocalizer<MatchController> localizer)
+        public MatchController(AppDbContext context, IActionLogger actionLogger, IStringLocalizer<MatchController> localizer, IMemoryCache cache)
         {
             _context = context;
             _actionLogger = actionLogger;
             _localizer = localizer;
+            _cache = cache;
         }
 
         [HttpPost("request")]
@@ -53,6 +57,9 @@ namespace SportConnect.API.Controllers
             await _context.SaveChangesAsync();
 
             await _actionLogger.LogAsync(fromUserId, $"user {fromUserId} sent match request to {dto.ToUserId} for sport {dto.SportId}");
+
+            _cache.Remove($"matches:{dto.FromUserId}");
+            _cache.Remove($"matches:{dto.ToUserId}");
 
             return Ok(request.Id);
         }
@@ -126,6 +133,9 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(userId, $"user {userId} updated match request {id} to {dto.Status}");
 
+            _cache.Remove($"matches:{request.FromUserId}");
+            _cache.Remove($"matches:{request.ToUserId}");
+
             return Ok(new { message = _localizer["MatchRequestUpdated", id, dto.Status] });
         }
 
@@ -171,6 +181,9 @@ namespace SportConnect.API.Controllers
 
             await _actionLogger.LogAsync(adminId, $"admin deleted match request {id}");
 
+            _cache.Remove($"matches:{request.FromUserId}");
+            _cache.Remove($"matches:{request.ToUserId}");
+
             return Ok(new { message = _localizer["MatchRequestDeleted", id] });
         }
 
@@ -185,44 +198,54 @@ namespace SportConnect.API.Controllers
             if (!Guid.TryParse(userIdClaim, out var userId))
                 return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
 
-            var me = await _context.Users
-                .Include(u => u.UserSports)
-                .FirstOrDefaultAsync(u => u.Id == userId);
+            var cacheKey = $"matches:{userId}";
 
-            if (me == null)
-                return NotFound(new { message = _localizer["UserNotFound"] });
+            if (!_cache.TryGetValue(cacheKey, out List<UserMatchDto>? results))
+            {
+                var me = await _context.Users
+                    .Include(u => u.UserSports)
+                    .FirstOrDefaultAsync(u => u.Id == userId);
 
-            var mySportIds = me.UserSports.Select(us => us.SportId).ToHashSet();
+                if (me == null)
+                    return NotFound(new { message = _localizer["UserNotFound"] });
 
-            var candidates = await _context.Users
-                .Where(u => u.Id != me.Id && u.IsAvailableNow)
-                .Include(u => u.UserSports)
-                .ToListAsync();
+                var mySportIds = me.UserSports.Select(us => us.SportId).ToHashSet();
 
-            var results = candidates
-                .Select(u =>
-                {
-                    var candidateSportIds = u.UserSports.Select(us => us.SportId).ToHashSet();
-                    var sharedSports = mySportIds.Intersect(candidateSportIds).ToList();
+                var candidates = await _context.Users
+                    .Where(u => u.Id != me.Id && u.IsAvailableNow)
+                    .Include(u => u.UserSports)
+                    .ToListAsync();
 
-                    if (sharedSports.Count == 0)
-                        return null;
-
-                    var distanceKm = HaversineDistanceKm(me.Latitude, me.Longitude, u.Latitude, u.Longitude);
-
-                    if (distanceKm > me.SearchRadiusKm)
-                        return null;
-
-                    return new
+                results = candidates
+                    .Select(u =>
                     {
-                        u.Id,
-                        u.Name,
-                        DistanceKm = Math.Round(distanceKm, 2),
-                        SharedSportIds = sharedSports
-                    };
-                })
-                .Where(x => x != null)
-                .ToList();
+                        var candidateSportIds = u.UserSports.Select(us => us.SportId).ToHashSet();
+                        var sharedSports = mySportIds.Intersect(candidateSportIds).ToList();
+
+                        if (sharedSports.Count == 0)
+                            return null;
+
+                        var distanceKm = HaversineDistanceKm(me.Latitude, me.Longitude, u.Latitude, u.Longitude);
+
+                        if (distanceKm > me.SearchRadiusKm)
+                            return null;
+
+                        return new UserMatchDto
+                        {
+                            Id = u.Id,
+                            Name = u.Name ?? string.Empty,
+                            Email = u.Email ?? string.Empty,
+                            IsAvailableNow = u.IsAvailableNow,
+                            SearchRadiusKm = u.SearchRadiusKm,
+                            DistanceKm = Math.Round(distanceKm, 2),
+                            SharedSportIds = sharedSports
+                        };
+                    })
+                    .Where(x => x != null)
+                    .ToList()!;
+
+                _cache.Set(cacheKey, results, MatchesCacheDuration);
+            }
 
             await _actionLogger.LogAsync(userId, $"user {userId} viewed own matches");
 

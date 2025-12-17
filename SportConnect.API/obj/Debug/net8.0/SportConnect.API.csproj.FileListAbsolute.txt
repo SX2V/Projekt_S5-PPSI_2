@@ -366,3 +366,5 @@ C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportConnect.API.Resources.Controllers.UsersController.pl.resources
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportConnect.API.Resources.Controllers.UserSport.en.resources
 C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportConnect.API.Resources.Controllers.UserSport.pl.resources
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportConnect.API.Resources.Controllers.DataAnnotations.en.resources
+C:\Users\Sebek\source\repos\Projekt_S5-PPSI_2\SportConnect.API\obj\Debug\net8.0\SportConnect.API.Resources.Controllers.DataAnnotations.pl.resources

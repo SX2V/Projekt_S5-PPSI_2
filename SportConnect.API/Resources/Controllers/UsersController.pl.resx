@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AvailabilityUpdated" xml:space="preserve">
+    <value>Zaktualizowano dostępność użytkowników.</value>
+  </data>
   <data name="InvalidSportId" xml:space="preserve">
     <value>Nieprawidłowy identyfikator sportu.</value>
   </data>

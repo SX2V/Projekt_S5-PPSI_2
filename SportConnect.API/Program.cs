@@ -40,7 +40,7 @@ public class Program
                         Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
                 };
             });
-
+        builder.Services.AddMemoryCache();
         builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         builder.Services.AddScoped<IActionLogger, ActionLogger>();
         builder.Services.AddScoped<IEmailService, EmailService>();
