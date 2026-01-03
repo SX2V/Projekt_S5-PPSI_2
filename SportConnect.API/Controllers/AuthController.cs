@@ -60,10 +60,22 @@ namespace SportConnect.API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
+            await _emailService.SendEmailAsync(
+            user.Email!,
+            "Welcome to SportConnect!",
+            $"Hello {user.Name},\n\n" +
+            "Thank you for registering with SportConnect. Your account has been successfully created.\n" +
+            "You can now log in and start exploring training partners and sports activities.\n\n" +
+            "Kind regards,\n" +
+            "SportConnect Team"
+            );
+
+
             await _actionLogger.LogAsync(user.Id, $"user {user.Id} registered with role {role}");
 
             return Ok(new { message = _localizer["UserRegistered"] });
         }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)

@@ -16,10 +16,12 @@ namespace SportConnect.API.Controllers
         private readonly AppDbContext _context;
         private readonly IStringLocalizer<TrainingRequestsController> _localizer;
 
+
         public TrainingRequestsController(AppDbContext context, IStringLocalizer<TrainingRequestsController> localizer)
         {
             _context = context;
             _localizer = localizer;
+
         }
 
         private async Task LogAction(Guid userId, string action)
@@ -55,7 +57,10 @@ namespace SportConnect.API.Controllers
                 SenderId = senderId,
                 ReceiverId = dto.ReceiverId,
                 CreatedAt = DateTime.UtcNow,
-                Status = TrainingRequestStatus.Pending
+                Status = TrainingRequestStatus.Pending,
+                TrainingDateTime = dto.TrainingDateTime,
+                Location = dto.Location,
+                Message = dto.Message
             };
 
             _context.TrainingRequests.Add(request);

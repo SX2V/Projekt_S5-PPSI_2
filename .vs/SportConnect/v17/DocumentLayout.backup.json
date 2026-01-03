@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\usermatchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\dtos\\usermatchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\migrations\\20260103162406_addtrainingrequestdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\migrations\\20260103162406_addtrainingrequestdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\createtrainingrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\dtos\\createtrainingrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\models\\trainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\models\\trainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\usermatchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\dtos\\usermatchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\addsportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\assignsportsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\dtos\\assignsportsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\createtrainingrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\dtos\\createtrainingrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -91,10 +111,6 @@
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\services\\cachekeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\services\\actionlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\services\\actionlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -131,10 +147,6 @@
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\resources\\controllers\\authcontroller.en.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\resources\\controllers\\matchrequest.pl.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\resources\\controllers\\matchrequest.pl.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
@@ -161,10 +173,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\resources\\controllers\\matchcontroller.en.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\resources\\controllers\\matchcontroller.en.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\controllers\\trainingrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\resources\\controllers\\sportscontroller.pl.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
@@ -263,10 +271,6 @@
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\resources\\controllers\\trainingrequest.en.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\models\\trainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\models\\trainingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|c:\\users\\sebek\\source\\repos\\projekt_s5-ppsi_2\\sportconnect.api\\resources\\controllers\\user.pl.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
       "RelativeMoniker": "D:0:0:{57049752-E2C4-41DC-9ECD-0E5DD56657E8}|SportConnect.API\\SportConnect.API.csproj|solutionrelative:sportconnect.api\\resources\\controllers\\user.pl.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     },
@@ -321,7 +325,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 120,
+          "DockedWidth": 81,
           "SelectedChildIndex": -1,
           "Children": [
             {
@@ -330,11 +334,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             },
             {
               "$type": "Bookmark",
@@ -347,8 +351,8 @@
           ]
         },
         {
-          "DockedWidth": 213,
-          "SelectedChildIndex": 5,
+          "DockedWidth": 252,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -359,38 +363,90 @@
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260103162406_AddTrainingRequestDetails.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\20260103162406_AddTrainingRequestDetails.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Migrations\\20260103162406_AddTrainingRequestDetails.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\20260103162406_AddTrainingRequestDetails.cs",
+              "RelativeToolTip": "SportConnect.API\\Migrations\\20260103162406_AddTrainingRequestDetails.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-03T16:24:53.876Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddSportDto.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AddSportDto.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\AddSportDto.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AddSportDto.cs",
-              "RelativeToolTip": "SportConnect.API\\Dtos\\AddSportDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "TrainingRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\TrainingRequest.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Models\\TrainingRequest.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\TrainingRequest.cs",
+              "RelativeToolTip": "SportConnect.API\\Models\\TrainingRequest.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:57.477Z",
+              "WhenOpened": "2025-11-24T16:42:32.598Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserMatchDto.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserMatchDto.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UserMatchDto.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserMatchDto.cs",
-              "RelativeToolTip": "SportConnect.API\\Dtos\\UserMatchDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "CreateTrainingRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
+              "RelativeToolTip": "SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:19:24.911Z",
+              "WhenOpened": "2025-12-09T16:31:44.099Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "TrainingRequestsController.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\TrainingRequestsController.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\TrainingRequestsController.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\TrainingRequestsController.cs",
+              "RelativeToolTip": "SportConnect.API\\Controllers\\TrainingRequestsController.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAUwDsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-24T16:52:48.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "SportConnect.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwEYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T16:04:10.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Services\\EmailService.cs",
+              "RelativeToolTip": "SportConnect.API\\Services\\EmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T17:41:16.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "MatchController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\MatchController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\MatchController.cs",
@@ -403,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "AssignSportsDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AssignSportsDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\AssignSportsDto.cs",
@@ -411,25 +467,35 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\AssignSportsDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:49.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:49.179Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateTrainingRequestDto.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
-              "RelativeToolTip": "SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwA4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "AddSportDto.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AddSportDto.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\AddSportDto.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\AddSportDto.cs",
+              "RelativeToolTip": "SportConnect.API\\Dtos\\AddSportDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:44.099Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:57.477Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
+              "Title": "UserMatchDto.cs",
+              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserMatchDto.cs",
+              "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UserMatchDto.cs",
+              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserMatchDto.cs",
+              "RelativeToolTip": "SportConnect.API\\Dtos\\UserMatchDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T16:19:24.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\LoginDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\LoginDto.cs",
@@ -437,12 +503,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\LoginDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:38.746Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:38.746Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "MatchRequestStatusDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\MatchRequestStatusDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\MatchRequestStatusDto.cs",
@@ -450,12 +515,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\MatchRequestStatusDto.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:26.017Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:26.017Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "MatchRequestDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\MatchRequestDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\MatchRequestDto.cs",
@@ -463,12 +527,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\MatchRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:31.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:31.096Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "MatchRequestViewDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\MatchRequestViewDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\MatchRequestViewDto.cs",
@@ -476,12 +539,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\MatchRequestViewDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:18.046Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:18.046Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\RegisterDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\RegisterDto.cs",
@@ -489,12 +551,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\RegisterDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:10.503Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:10.503Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "RequestPasswordResetDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\RequestPasswordResetDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\RequestPasswordResetDto.cs",
@@ -502,12 +563,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\RequestPasswordResetDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:04.709Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:04.709Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "ResetPasswordDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\ResetPasswordDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\ResetPasswordDto.cs",
@@ -515,12 +575,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\ResetPasswordDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:30:58.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:30:58.967Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "UpdateLocationDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UpdateLocationDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UpdateLocationDto.cs",
@@ -528,12 +587,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\UpdateLocationDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:22:53.369Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:22:53.369Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "TrainingRequestStatsDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\TrainingRequestStatsDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\TrainingRequestStatsDto.cs",
@@ -541,12 +599,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\TrainingRequestStatsDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:30:46.896Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:30:46.896Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "UpdateProfileDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UpdateProfileDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UpdateProfileDto.cs",
@@ -554,12 +611,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\UpdateProfileDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:22:40.75Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:22:40.75Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "UpdateSportDistanceDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UpdateSportDistanceDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UpdateSportDistanceDto.cs",
@@ -567,12 +623,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\UpdateSportDistanceDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:19:34.221Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:19:34.221Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "UserProfileDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserProfileDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UserProfileDto.cs",
@@ -580,12 +635,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\UserProfileDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T17:37:44.689Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-13T17:37:44.689Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "UserSportDto.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Dtos\\UserSportDto.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Dtos\\UserSportDto.cs",
@@ -593,12 +647,11 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\UserSportDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:19:08.108Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:19:08.108Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\AdminController.cs",
@@ -606,12 +659,11 @@
               "RelativeToolTip": "SportConnect.API\\Controllers\\AdminController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T16:19:51.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T16:19:51.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\UsersController.cs",
@@ -619,12 +671,11 @@
               "RelativeToolTip": "SportConnect.API\\Controllers\\UsersController.cs",
               "ViewState": "AgIAAIwCAAAAAAAAAAApwJsCAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-02T15:40:47.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-02T15:40:47.943Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "SportsController.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\SportsController.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\SportsController.cs",
@@ -632,12 +683,11 @@
               "RelativeToolTip": "SportConnect.API\\Controllers\\SportsController.cs",
               "ViewState": "AgIAAF4AAAAAAAAAAAAkwHUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T15:26:56.406Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-05T15:26:56.406Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "CacheKeys.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Services\\CacheKeys.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Services\\CacheKeys.cs",
@@ -645,24 +695,22 @@
               "RelativeToolTip": "SportConnect.API\\Services\\CacheKeys.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-13T16:34:34.14Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-13T16:34:34.14Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "UsersController.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UsersController.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UsersController.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UsersController.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UsersController.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:43:41.219Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:43:41.219Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Program.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Program.cs",
@@ -670,36 +718,33 @@
               "RelativeToolTip": "SportConnect.API\\Program.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAAwDEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-06T16:05:12.169Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-06T16:05:12.169Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "DataAnnotations.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\DataAnnotations.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\DataAnnotations.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\DataAnnotations.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\DataAnnotations.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T18:33:36.454Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T18:33:36.454Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "AdminController.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AdminController.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\AdminController.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AdminController.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\AdminController.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T18:07:57.908Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T18:07:57.908Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "JavaScript.js",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\wwwroot\\JavaScript.js",
               "RelativeDocumentMoniker": "SportConnect.API\\wwwroot\\JavaScript.js",
@@ -711,415 +756,359 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "AdminController.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AdminController.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\AdminController.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AdminController.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\AdminController.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T18:07:44.038Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T18:07:44.038Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "AuthController.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AuthController.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\AuthController.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AuthController.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\AuthController.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T18:01:35.876Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T18:01:35.876Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 35,
               "Title": "AuthController.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AuthController.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\AuthController.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AuthController.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\AuthController.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T18:01:25.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T18:01:25.284Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "MatchRequest.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequest.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\MatchRequest.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequest.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\MatchRequest.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:32:30.325Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:32:30.325Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "UpdateTrainingRequestStatusDto.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:58:01.674Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:58:01.674Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "SportConnect.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAQwKwAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-06T16:04:10.688Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
               "Title": "UpdateTrainingRequestStatusDto.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateTrainingRequestStatusDto.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:57:48.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:57:48.496Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 39,
               "Title": "MatchRequestStatusDto.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:57:00.419Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:57:00.419Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "MatchRequestStatusDto.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\MatchRequestStatusDto.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:56:47.738Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:56:47.738Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "MatchController.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchController.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\MatchController.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchController.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\MatchController.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:51:49.684Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:51:49.684Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 42,
               "Title": "MatchController.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchController.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\MatchController.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchController.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\MatchController.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:51:30.173Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:51:30.173Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 43,
               "Title": "SportsController.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\SportsController.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\SportsController.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\SportsController.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\SportsController.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:41:11.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:41:11.433Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 44,
               "Title": "SportsController.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\SportsController.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\SportsController.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\SportsController.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\SportsController.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:40:56.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:40:56.644Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 45,
               "Title": "TrainingRequestsController.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:35:02.787Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:35:02.787Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 46,
               "Title": "TrainingRequestsController.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\TrainingRequestsController.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T17:34:48.593Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T17:34:48.593Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 48,
               "Title": "AddSportDto.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AddSportDto.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\AddSportDto.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AddSportDto.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\AddSportDto.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:33:40.635Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:33:40.635Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "TrainingRequestsController.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\TrainingRequestsController.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Controllers\\TrainingRequestsController.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Controllers\\TrainingRequestsController.cs",
-              "RelativeToolTip": "SportConnect.API\\Controllers\\TrainingRequestsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-24T16:52:48.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 49,
               "Title": "AddSportDto.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AddSportDto.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\AddSportDto.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\AddSportDto.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\AddSportDto.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:33:31.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:33:31.653Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 50,
               "Title": "UpdateLocationDto.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:28:43.18Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:28:43.18Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 51,
               "Title": "UpdateLocationDto.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateLocationDto.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:28:12.062Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:28:12.062Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 52,
               "Title": "UpdateProfileDto.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:25:18.622Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:25:18.622Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 53,
               "Title": "UpdateProfileDto.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateProfileDto.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:25:02.099Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:25:02.099Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 54,
               "Title": "UpdateSportDistanceDto.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:21:27.599Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:21:27.599Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 55,
               "Title": "UpdateSportDistanceDto.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UpdateSportDistanceDto.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-09T16:21:03.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:21:03.494Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 58,
               "Title": "MatchRequest.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequest.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\MatchRequest.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\MatchRequest.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\MatchRequest.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:32:11.317Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:32:11.317Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "Sport.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\Sport.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\Sport.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\Sport.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\Sport.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:26:35.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:26:35.193Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "Sport.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\Sport.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\Sport.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\Sport.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\Sport.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:26:15.77Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:26:15.77Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "TrainingRequest.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequest.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\TrainingRequest.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequest.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\TrainingRequest.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:21:40.37Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:21:40.37Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "TrainingRequest.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequest.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\TrainingRequest.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\TrainingRequest.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\TrainingRequest.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:21:21.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:21:21.187Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 67,
               "Title": "User.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\User.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\User.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\User.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\User.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:14:09.907Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:14:09.907Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 68,
               "Title": "User.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\User.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\User.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\User.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\User.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T18:10:31.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T18:10:31.731Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 69,
               "Title": "UserSport.pl.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UserSport.pl.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UserSport.pl.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UserSport.pl.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UserSport.pl.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T17:56:36.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T17:56:36.416Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 70,
               "Title": "UserSport.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UserSport.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\UserSport.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\UserSport.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\UserSport.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T17:56:09.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T17:56:09.118Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 71,
               "Title": "EmailService.en.resx",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\EmailService.en.resx",
               "RelativeDocumentMoniker": "SportConnect.API\\Resources\\Controllers\\EmailService.en.resx",
               "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Resources\\Controllers\\EmailService.en.resx",
               "RelativeToolTip": "SportConnect.API\\Resources\\Controllers\\EmailService.en.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-08T17:48:31.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T17:48:31.606Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 72,
               "Title": "SportConnect.API.csproj",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\SportConnect.API.csproj",
               "RelativeDocumentMoniker": "SportConnect.API\\SportConnect.API.csproj",
@@ -1131,20 +1120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "EmailService.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Services\\EmailService.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Services\\EmailService.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Services\\EmailService.cs",
-              "RelativeToolTip": "SportConnect.API\\Services\\EmailService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T17:41:16.739Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 60,
               "Title": "PasswordResetToken.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\PasswordResetToken.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\PasswordResetToken.cs",
@@ -1156,7 +1132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "ActionLogger.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Services\\ActionLogger.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Services\\ActionLogger.cs",
@@ -1164,12 +1140,11 @@
               "RelativeToolTip": "SportConnect.API\\Services\\ActionLogger.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-30T16:47:48.253Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-30T16:47:48.253Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 57,
               "Title": "ActionLog.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\ActionLog.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\ActionLog.cs",
@@ -1181,7 +1156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 75,
               "Title": "20251129172655_AddRespondedAtToTrainingRequest.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\20251129172655_AddRespondedAtToTrainingRequest.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Migrations\\20251129172655_AddRespondedAtToTrainingRequest.cs",
@@ -1193,7 +1168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 74,
               "Title": "AppDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
@@ -1205,7 +1180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 77,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "SportConnect.API\\Properties\\launchSettings.json",
@@ -1217,7 +1192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 76,
               "Title": "SportConnect.API.http",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\SportConnect.API.http",
               "RelativeDocumentMoniker": "SportConnect.API\\SportConnect.API.http",
@@ -1229,7 +1204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 78,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\appsettings.Development.json",
               "RelativeDocumentMoniker": "SportConnect.API\\appsettings.Development.json",
@@ -1241,7 +1216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 73,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\appsettings.json",
               "RelativeDocumentMoniker": "SportConnect.API\\appsettings.json",
@@ -1253,19 +1228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
-              "Title": "TrainingRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\TrainingRequest.cs",
-              "RelativeDocumentMoniker": "SportConnect.API\\Models\\TrainingRequest.cs",
-              "ToolTip": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\TrainingRequest.cs",
-              "RelativeToolTip": "SportConnect.API\\Models\\TrainingRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-24T16:42:32.598Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 59,
               "Title": "MatchRequest.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\MatchRequest.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\MatchRequest.cs",
@@ -1277,7 +1240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 47,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Data\\AppDbContext.cs",
@@ -1289,7 +1252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 56,
               "Title": "UserSport.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\UserSport.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\UserSport.cs",
@@ -1301,7 +1264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 62,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\User.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\User.cs",
@@ -1313,7 +1276,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 61,
               "Title": "Sport.cs",
               "DocumentMoniker": "C:\\Users\\Sebek\\source\\repos\\Projekt_S5-PPSI_2\\SportConnect.API\\Models\\Sport.cs",
               "RelativeDocumentMoniker": "SportConnect.API\\Models\\Sport.cs",

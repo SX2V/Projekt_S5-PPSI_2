@@ -4,7 +4,11 @@ using System.ComponentModel.DataAnnotations;
 public class CreateTrainingRequestDto
 {
     public Guid ReceiverId { get; set; }
+    public DateTime? TrainingDateTime { get; set; }
+    public string? Location { get; set; }
+    public string? Message { get; set; }
 }
+
 
 public class UpdateTrainingRequestStatusDto
 {

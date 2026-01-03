@@ -27,5 +27,9 @@ namespace SportConnect.API.Models
         public TrainingRequestStatus Status { get; set; } = TrainingRequestStatus.Pending;
 
         public DateTime? RespondedAt { get; set; }
+
+        public DateTime? TrainingDateTime { get; set; }
+        public string? Location { get; set; }
+        public string? Message { get; set; }
     }
 }

@@ -32,7 +32,26 @@ namespace SportConnect.API.Data
                 .HasOne(us => us.Sport)
                 .WithMany(s => s.UserSports)
                 .HasForeignKey(us => us.SportId);
-        }
 
+            modelBuilder.Entity<TrainingRequest>()
+                .Property(t => t.TrainingDateTime)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<ActionLog>()
+                .Property(a => a.Timestamp)
+                .HasColumnType("timestamp with time zone");
+
+            modelBuilder.Entity<TrainingRequest>()
+                .Property(t => t.CreatedAt)
+                .HasColumnType("timestamp with time zone");
+
+            modelBuilder.Entity<TrainingRequest>()
+                .Property(t => t.RespondedAt)
+                .HasColumnType("timestamp with time zone");
+
+            modelBuilder.Entity<MatchRequest>()
+                .Property(m => m.CreatedAt)
+                .HasColumnType("timestamp with time zone");
+        }
     }
 }
