@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory; //dodane
 using SportConnect.API.Data;
 using SportConnect.API.Dtos;
 using SportConnect.API.Models;
@@ -16,11 +17,13 @@ namespace SportConnect.API.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IActionLogger _actionLogger;
+        private readonly IMemoryCache _cache;  // dodane
 
-        public UsersController(AppDbContext context, IActionLogger actionLogger)
+        public UsersController(AppDbContext context, IActionLogger actionLogger, IMemoryCache cache) //dodane
         {
             _context = context;
             _actionLogger = actionLogger;
+            _cache = cache;  // dodane
         }
 
         [HttpPost]
