@@ -45,5 +45,24 @@ namespace SportConnect.API.Models
 
         [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180.")]
         public double Longitude { get; set; } = 0;
+
+        // Zmiany
+        
+        // Facebook User ID - używane do logowania przez Facebook
+        
+        [MaxLength(100)]
+        public string? FacebookId { get; set; }
+        
+        // Strava Athlete ID - używane do logowania przez Strava
+
+        public long? StravaId { get; set; }
+        
+        // Data utworzenia konta użytkownika
+        
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        
+        // Data ostatniej aktualizacji profilu użytkownika
+
+        public DateTime? UpdatedAt { get; set; }
     }
 }
