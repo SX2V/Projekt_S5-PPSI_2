@@ -22,19 +22,30 @@ namespace SportConnect.API.Controllers
         private readonly IConfiguration _config;
         private readonly IActionLogger _actionLogger;
         private readonly IEmailService _emailService;
+        // Serwisy dla logowania społecznościowego
+        private readonly IFacebookAuthService _facebookAuthService;
+        private readonly IStravaAuthService _stravaAuthService;
+        private readonly ILogger<AuthController> _logger;
 
         public AuthController(
             AppDbContext context,
             IPasswordHasher<User> hasher,
             IConfiguration config,
             IActionLogger actionLogger,
-            IEmailService emailService)
+            IEmailService emailService,
+            // Dependency Injection dla nowych serwisów
+            IFacebookAuthService facebookAuthService,
+            IStravaAuthService stravaAuthService,
+            ILogger<AuthController> logger)
         {
             _context = context;
             _hasher = hasher;
             _config = config;
             _actionLogger = actionLogger;
             _emailService = emailService;
+            _facebookAuthService = facebookAuthService;
+            _stravaAuthService = stravaAuthService;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -80,6 +91,183 @@ namespace SportConnect.API.Controllers
             await _actionLogger.LogAsync(user.Id, $"user {user.Id} logged in");
 
             return Ok(new { token });
+        }
+
+        // Logowanie przez Facebook - przyjmuje access token z Facebook SDK
+        
+        [HttpPost("facebook")]
+        public async Task<IActionResult> FacebookLogin([FromBody] FacebookLoginDto dto)
+        {
+            try
+            {
+                // 1. Walidacja tokenu Facebook
+                var facebookUser = await _facebookAuthService.ValidateAccessTokenAsync(dto.AccessToken);
+                if (facebookUser == null)
+                {
+                    _logger.LogWarning("Invalid Facebook token received");
+                    return Unauthorized(new { message = "Invalid Facebook token" });
+                }
+
+                // 2. Sprawdź czy użytkownik już istnieje (po FacebookId lub Email)
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.FacebookId == facebookUser.Id);
+
+                if (user == null && !string.IsNullOrEmpty(facebookUser.Email))
+                {
+                    user = await _context.Users
+                        .FirstOrDefaultAsync(u => u.Email == facebookUser.Email);
+                }
+
+                // 3. Jeśli użytkownik nie istnieje - utwórz nowego
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        Email = facebookUser.Email,
+                        Name = facebookUser.Name,
+                        FacebookId = facebookUser.Id,
+                        Role = UserRole.User,
+                        IsBlocked = false,
+                        PasswordHash = string.Empty // Nie używamy hasła dla social login
+                    };
+
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
+
+                    _logger.LogInformation("New user created via Facebook: {Email}", user.Email);
+                    await _actionLogger.LogAsync(user.Id, $"user {user.Id} registered via Facebook");
+                }
+                else if (string.IsNullOrEmpty(user.FacebookId))
+                {
+                    // Jeśli użytkownik istniał ale nie miał FacebookId - zaktualizuj
+                    user.FacebookId = facebookUser.Id;
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("FacebookId linked to existing user: {Email}", user.Email);
+                }
+
+                // 4. Sprawdź czy użytkownik nie jest zablokowany
+                if (user.IsBlocked)
+                {
+                    return Unauthorized(new { message = "User is blocked" });
+                }
+
+                // 5. Wygeneruj JWT
+                var token = GenerateJwtToken(user);
+
+                await _actionLogger.LogAsync(user.Id, $"user {user.Id} logged in via Facebook");
+
+                return Ok(new
+                {
+                    token,
+                    user = new
+                    {
+                        id = user.Id,
+                        email = user.Email,
+                        name = user.Name,
+                        role = user.Role.ToString()
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during Facebook login");
+                return StatusCode(500, new { message = "Internal server error during Facebook login" });
+            }
+        }
+
+        
+        // Logowanie przez Strava - przyjmuje authorization code z OAuth flow
+
+        [HttpPost("strava")]
+        public async Task<IActionResult> StravaLogin([FromBody] StravaLoginDto dto)
+        {
+            try
+            {
+                // 1. Wymień authorization code na access token
+                var tokenResponse = await _stravaAuthService.ExchangeCodeForTokenAsync(dto.Code);
+                if (tokenResponse == null)
+                {
+                    _logger.LogWarning("Invalid Strava authorization code");
+                    return Unauthorized(new { message = "Invalid Strava authorization code" });
+                }
+
+                // 2. Pobierz profil użytkownika ze Strava
+                var stravaUser = await _stravaAuthService.GetAthleteProfileAsync(tokenResponse.AccessToken);
+                if (stravaUser == null)
+                {
+                    _logger.LogWarning("Could not retrieve Strava profile");
+                    return Unauthorized(new { message = "Could not retrieve Strava profile" });
+                }
+
+                // 3. Sprawdź czy użytkownik już istnieje (po StravaId lub Email)
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.StravaId == stravaUser.Id);
+
+                if (user == null && !string.IsNullOrEmpty(stravaUser.Email))
+                {
+                    user = await _context.Users
+                        .FirstOrDefaultAsync(u => u.Email == stravaUser.Email);
+                }
+
+                // 4. Jeśli użytkownik nie istnieje - utwórz nowego
+                if (user == null)
+                {
+                    // Strava może nie zwracać emaila - generujemy fallback
+                    var email = stravaUser.Email ?? $"strava_{stravaUser.Id}@sportconnect.local";
+                    var name = $"{stravaUser.Firstname} {stravaUser.Lastname}".Trim();
+
+                    user = new User
+                    {
+                        Email = email,
+                        Name = string.IsNullOrEmpty(name) ? stravaUser.Username : name,
+                        StravaId = stravaUser.Id,
+                        Role = UserRole.User,
+                        IsBlocked = false,
+                        PasswordHash = string.Empty // Nie używamy hasła dla social login
+                    };
+
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
+
+                    _logger.LogInformation("New user created via Strava: {Email}", user.Email);
+                    await _actionLogger.LogAsync(user.Id, $"user {user.Id} registered via Strava");
+                }
+                else if (user.StravaId == null)
+                {
+                    // Jeśli użytkownik istniał ale nie miał StravaId - zaktualizuj
+                    user.StravaId = stravaUser.Id;
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("StravaId linked to existing user: {Email}", user.Email);
+                }
+
+                // 5. Sprawdź czy użytkownik nie jest zablokowany
+                if (user.IsBlocked)
+                {
+                    return Unauthorized(new { message = "User is blocked" });
+                }
+
+                // 6. Wygeneruj JWT
+                var token = GenerateJwtToken(user);
+
+                await _actionLogger.LogAsync(user.Id, $"user {user.Id} logged in via Strava");
+
+                return Ok(new
+                {
+                    token,
+                    user = new
+                    {
+                        id = user.Id,
+                        email = user.Email,
+                        name = user.Name,
+                        role = user.Role.ToString()
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during Strava login");
+                return StatusCode(500, new { message = "Internal server error during Strava login" });
+            }
         }
 
         private string GenerateJwtToken(User user)
@@ -156,6 +344,7 @@ namespace SportConnect.API.Controllers
 
             return Ok("Password reset link sent.");
         }
+
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
         {
@@ -179,6 +368,5 @@ namespace SportConnect.API.Controllers
 
             return Ok("Password has been reset successfully.");
         }
-
     }
 }
