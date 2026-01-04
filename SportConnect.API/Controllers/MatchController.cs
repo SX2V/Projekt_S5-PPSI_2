@@ -252,6 +252,33 @@ namespace SportConnect.API.Controllers
             return Ok(results);
         }
 
+        [HttpPatch("{id}/cancel")]
+        [Authorize]
+        public async Task<IActionResult> CancelMatchRequest(Guid id)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
+
+            var request = await _context.MatchRequests.FindAsync(id);
+
+            if (request == null)
+                return NotFound(new { message = _localizer["MatchRequestNotFound"] });
+
+            if (request.FromUserId != userId && request.ToUserId != userId)
+                return Forbid();
+
+            request.Status = MatchRequestStatus.Cancelled;
+            await _context.SaveChangesAsync();
+
+            await _actionLogger.LogAsync(userId, $"user {userId} cancelled match request {id}");
+
+            _cache.Remove($"matches:{request.FromUserId}");
+            _cache.Remove($"matches:{request.ToUserId}");
+
+            return NoContent();
+        }
+
         private static double HaversineDistanceKm(double lat1, double lon1, double lat2, double lon2)
         {
             const double R = 6371.0;

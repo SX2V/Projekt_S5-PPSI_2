@@ -7,7 +7,8 @@ namespace SportConnect.API.Models
     {
         Pending,
         Accepted,
-        Rejected
+        Rejected,
+        Cancelled
     }
 
     public class MatchRequest

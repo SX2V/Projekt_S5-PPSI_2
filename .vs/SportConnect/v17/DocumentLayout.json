@@ -329,7 +329,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 197,
+          "DockedWidth": 64,
           "SelectedChildIndex": -1,
           "Children": [
             {
@@ -355,8 +355,8 @@
           ]
         },
         {
-          "DockedWidth": 136,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 269,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -369,6 +369,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
               "$type": "Document",
@@ -393,8 +397,7 @@
               "RelativeToolTip": "SportConnect.API\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T15:20:31.724Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-05T15:20:31.724Z"
             },
             {
               "$type": "Document",
@@ -406,8 +409,7 @@
               "RelativeToolTip": "SportConnect.API\\Models\\TrainingRequest.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-24T16:42:32.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-24T16:42:32.598Z"
             },
             {
               "$type": "Document",
@@ -419,8 +421,7 @@
               "RelativeToolTip": "SportConnect.API\\Migrations\\20260103175550_ForceFixTrainingDateTime2.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-03T17:56:19.694Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-03T17:56:19.694Z"
             },
             {
               "$type": "Document",
@@ -432,8 +433,7 @@
               "RelativeToolTip": "SportConnect.API\\Migrations\\AppDbContextModelSnapshot.cs",
               "ViewState": "AgIAAH4AAAAAAAAAAADgv5YAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-03T17:53:23.976Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-03T17:53:23.976Z"
             },
             {
               "$type": "Document",
@@ -445,8 +445,7 @@
               "RelativeToolTip": "SportConnect.API\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAK0AAAAAAAAAAAAswMgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-06T16:04:10.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-06T16:04:10.688Z"
             },
             {
               "$type": "Document",
@@ -458,8 +457,7 @@
               "RelativeToolTip": "SportConnect.API\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-06T16:05:12.169Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-06T16:05:12.169Z"
             },
             {
               "$type": "Document",
@@ -471,8 +469,7 @@
               "RelativeToolTip": "SportConnect.API\\Migrations\\20260103162406_AddTrainingRequestDetails.cs",
               "ViewState": "AgIAADwAAAAAAAAAAAA1wGQAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-03T16:24:53.876Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-03T16:24:53.876Z"
             },
             {
               "$type": "Document",
@@ -484,8 +481,7 @@
               "RelativeToolTip": "SportConnect.API\\Dtos\\CreateTrainingRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T16:31:44.099Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T16:31:44.099Z"
             },
             {
               "$type": "Document",
@@ -497,8 +493,7 @@
               "RelativeToolTip": "SportConnect.API\\Services\\EmailService.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAkwDYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T17:41:16.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-01T17:41:16.739Z"
             },
             {
               "$type": "Document",
@@ -510,12 +505,7 @@
               "RelativeToolTip": "SportConnect.API\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-11-25T16:00:53.391Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+              "WhenOpened": "2025-11-25T16:00:53.391Z"
             },
             {
               "$type": "Document",

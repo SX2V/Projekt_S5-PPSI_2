@@ -163,5 +163,30 @@ namespace SportConnect.API.Controllers
 
             return Ok(requests);
         }
+        [HttpPatch("{id}/cancel")]
+        [Authorize]
+        public async Task<IActionResult> CancelTrainingRequest(Guid id)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userIdClaim, out var currentUserId))
+                return Unauthorized(new { message = _localizer["InvalidUserIdentifier"] });
+
+            var request = await _context.TrainingRequests.FindAsync(id);
+            if (request == null)
+                return NotFound(new { message = _localizer["TrainingRequestNotFound"] });
+
+            if (request.SenderId != currentUserId && request.ReceiverId != currentUserId)
+                return Forbid(_localizer["NotAuthorizedToModifyRequest"]);
+
+            request.Status = TrainingRequestStatus.Cancelled;
+            request.RespondedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+
+            await LogAction(currentUserId, $"cancelled training request {id}");
+
+            return NoContent();
+        }
+
     }
 }
