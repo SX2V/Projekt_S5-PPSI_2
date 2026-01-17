@@ -3,10 +3,12 @@ import { ref, onMounted } from 'vue';
 import apiClient from '../api/axios';
 import type { TrainingRequestStatsDto } from '../types/api';
 import { useToastStore } from '../stores/toast';
+import { useI18n } from 'vue-i18n';
 
 const stats = ref<TrainingRequestStatsDto | null>(null);
 const isLoading = ref(false);
 const toast = useToastStore();
+const { t } = useI18n();
 
 const fetchStats = async () => {
   isLoading.value = true;
@@ -15,7 +17,7 @@ const fetchStats = async () => {
     stats.value = response.data;
   } catch (error) {
     console.error('Failed to fetch statistics', error);
-    toast.error('Failed to load dashboard statistics');
+    toast.error(t('admin.loadStatsFailed'));
   } finally {
     isLoading.value = false;
   }
@@ -28,7 +30,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Dashboard Overview</h2>
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{{ t('admin.dashboardOverview') }}</h2>
     
     <div v-if="isLoading" class="flex justify-center py-12">
       <font-awesome-icon icon="spinner" spin class="text-indigo-500 dark:text-indigo-400 text-3xl" />
@@ -44,7 +46,7 @@ onMounted(() => {
             </div>
             <div class="ml-5 w-0 flex-1">
               <dl>
-                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Daily Requests</dt>
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ t('admin.dailyRequests') }}</dt>
                 <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ stats.dailyRequests }}</dd>
               </dl>
             </div>
@@ -60,7 +62,7 @@ onMounted(() => {
             </div>
             <div class="ml-5 w-0 flex-1">
               <dl>
-                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Weekly Requests</dt>
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ t('admin.weeklyRequests') }}</dt>
                 <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ stats.weeklyRequests }}</dd>
               </dl>
             </div>
@@ -76,7 +78,7 @@ onMounted(() => {
             </div>
             <div class="ml-5 w-0 flex-1">
               <dl>
-                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Monthly Requests</dt>
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ t('admin.monthlyRequests') }}</dt>
                 <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ stats.monthlyRequests }}</dd>
               </dl>
             </div>
@@ -93,7 +95,7 @@ onMounted(() => {
             </div>
             <div class="ml-5 w-0 flex-1">
               <dl>
-                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Daily Responses</dt>
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ t('admin.dailyResponses') }}</dt>
                 <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ stats.dailyResponses }}</dd>
               </dl>
             </div>
@@ -109,7 +111,7 @@ onMounted(() => {
             </div>
             <div class="ml-5 w-0 flex-1">
               <dl>
-                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Weekly Responses</dt>
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ t('admin.weeklyResponses') }}</dt>
                 <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ stats.weeklyResponses }}</dd>
               </dl>
             </div>
@@ -125,7 +127,7 @@ onMounted(() => {
             </div>
             <div class="ml-5 w-0 flex-1">
               <dl>
-                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Monthly Responses</dt>
+                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{{ t('admin.monthlyResponses') }}</dt>
                 <dd class="text-lg font-medium text-gray-900 dark:text-white">{{ stats.monthlyResponses }}</dd>
               </dl>
             </div>

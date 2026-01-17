@@ -3,10 +3,12 @@ import { ref } from 'vue';
 import apiClient from '../api/axios';
 import { useRouter } from 'vue-router';
 import { useToastStore } from '../stores/toast';
+import { useI18n } from 'vue-i18n';
 import type { RequestPasswordResetDto } from '../types/api';
 
 const router = useRouter();
 const toast = useToastStore();
+const { t } = useI18n();
 
 const email = ref('');
 const isLoading = ref(false);
@@ -19,11 +21,11 @@ const handleRequestReset = async () => {
 
   try {
     await apiClient.post('/auth/request-reset', payload);
-    toast.success('If an account exists, a reset link has been sent.');
+    toast.success(t('auth.resetLinkSent'));
     setTimeout(() => router.push('/login'), 3000);
   } catch (error) {
     console.error('Failed to request password reset', error);
-    toast.error('Failed to process request. Please try again.');
+    toast.error(t('auth.resetRequestFailed'));
   } finally {
     isLoading.value = false;
   }
@@ -35,16 +37,16 @@ const handleRequestReset = async () => {
     <div class="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg transition-colors duration-200">
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-          Reset your password
+          {{ t('auth.resetPasswordTitle') }}
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-          Enter your email address and we'll send you a link to reset your password.
+          {{ t('auth.resetPasswordDesc') }}
         </p>
       </div>
       <form class="mt-8 space-y-6" @submit.prevent="handleRequestReset">
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="email-address" class="sr-only">Email address</label>
+            <label for="email-address" class="sr-only">{{ t('common.email') }}</label>
             <input
               id="email-address"
               name="email"
@@ -53,7 +55,7 @@ const handleRequestReset = async () => {
               required
               v-model="email"
               class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="Email address"
+              :placeholder="t('common.email')"
             />
           </div>
         </div>
@@ -68,13 +70,13 @@ const handleRequestReset = async () => {
               <font-awesome-icon v-if="!isLoading" icon="envelope" class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 dark:text-indigo-300 dark:group-hover:text-indigo-200" />
               <font-awesome-icon v-else icon="spinner" spin class="h-5 w-5 text-indigo-500 dark:text-indigo-300" />
             </span>
-            {{ isLoading ? 'Sending...' : 'Send Reset Link' }}
+            {{ isLoading ? t('auth.sending') : t('auth.sendResetLink') }}
           </button>
         </div>
         
         <div class="text-center">
             <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm" @click.prevent="router.push('/login')">
-              Back to Sign In
+              {{ t('auth.backToSignIn') }}
             </a>
         </div>
       </form>

@@ -3,6 +3,7 @@ import { ref, onMounted, watch, computed } from 'vue';
 import { useAuthStore } from '../stores/auth';
 import { useToastStore } from '../stores/toast';
 import apiClient from '../api/axios';
+import { useI18n } from 'vue-i18n';
 import type { 
   UpdateProfileDto, 
   UserSportDto, 
@@ -17,6 +18,7 @@ import { AxiosError } from 'axios';
 
 const authStore = useAuthStore();
 const toast = useToastStore();
+const { t } = useI18n();
 
 const localUser = ref<User | null>(null);
 
@@ -62,7 +64,7 @@ const fetchUserSports = async () => {
     userSports.value = response.data;
   } catch (error) {
     console.error('Failed to fetch user sports', error);
-    toast.error('Failed to load sports.');
+    toast.error(t('match.loadSportsFailed'));
   } finally {
     isLoadingSports.value = false;
   }
@@ -117,7 +119,7 @@ const updateProfile = async () => {
     await authStore.fetchUser();
     
     isEditingProfile.value = false;
-    toast.success('Profile updated successfully');
+    toast.success(t('profile.profileUpdated'));
   } catch (error) {
     console.error('Failed to update profile', error);
     const axiosError = error as AxiosError;
@@ -126,7 +128,7 @@ const updateProfile = async () => {
         console.log('Backend validation errors:', axiosError.response.data);
     }
 
-    const msg = (axiosError.response?.data as any)?.title || 'Failed to update profile (400 Bad Request)';
+    const msg = (axiosError.response?.data as any)?.title || t('profile.updateFailed');
     toast.error(msg);
   }
 };
@@ -145,13 +147,13 @@ const toggleAvailability = async () => {
     await authStore.fetchUser();
     
     if (newStatus) {
-        toast.success('You are now Online');
+        toast.success(t('profile.nowOnline'));
     } else {
-        toast.info('You are now Offline');
+        toast.info(t('profile.nowOffline'));
     }
   } catch (error) {
     console.error('Failed to update status', error);
-    toast.error('Failed to change status');
+    toast.error(t('profile.statusChangeFailed'));
   }
 };
 
@@ -180,10 +182,10 @@ const handleFileUpload = async (event: Event) => {
     
     await authStore.fetchUser(); 
     
-    toast.success('Profile picture updated');
+    toast.success(t('profile.pictureUpdated'));
   } catch (error) {
     console.error('Failed to upload photo', error);
-    toast.error('Failed to upload photo');
+    toast.error(t('profile.uploadFailed'));
   } finally {
     isUploadingPhoto.value = false;
     if (fileInput.value) fileInput.value.value = '';
@@ -206,22 +208,22 @@ const addSport = async () => {
     await fetchUserSports();
     isAddSportModalOpen.value = false;
     newSportId.value = '';
-    toast.success('Sport added');
+    toast.success(t('profile.sportAdded'));
   } catch (error) {
     console.error('Failed to add sport', error);
-    toast.error('Failed to add sport');
+    toast.error(t('profile.addSportFailed'));
   }
 };
 
 const removeSport = async (sportId: string) => {
-  if (!confirm('Are you sure you want to remove this sport?')) return;
+  if (!confirm(t('profile.confirmRemoveSport'))) return;
   try {
     await apiClient.delete(`/Users/me/sports/${sportId}`);
     await fetchUserSports();
-    toast.success('Sport removed');
+    toast.success(t('profile.sportRemoved'));
   } catch (error) {
     console.error('Failed to remove sport', error);
-    toast.error('Failed to remove sport');
+    toast.error(t('profile.removeSportFailed'));
   }
 };
 
@@ -277,32 +279,32 @@ onMounted(async () => {
                 : 'bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-600'"
             >
                 <font-awesome-icon :icon="localUser?.isAvailableNow ? 'toggle-on' : 'toggle-off'" class="text-lg" />
-                <span class="text-sm font-medium">{{ localUser?.isAvailableNow ? 'Online' : 'Offline' }}</span>
+                <span class="text-sm font-medium">{{ localUser?.isAvailableNow ? t('common.online') : t('common.offline') }}</span>
             </button>
         </div>
 
         <!-- Profile Details -->
         <div class="mt-8 border-t border-gray-100 dark:border-gray-700 pt-6 text-left"> 
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">About Me</h2>
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('profile.aboutMe') }}</h2>
             <button 
               v-if="!isEditingProfile"
               @click="isEditingProfile = true"
               class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 text-sm font-medium flex items-center"
             >
-              <font-awesome-icon icon="edit" class="mr-1" /> Edit
+              <font-awesome-icon icon="edit" class="mr-1" /> {{ t('common.edit') }}
             </button>
           </div>
 
           <div v-if="!isEditingProfile">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <span class="text-gray-500 dark:text-gray-400 text-sm block">Age</span>
-                <span class="text-gray-900 dark:text-white">{{ localUser?.age || 'Not specified' }}</span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm block">{{ t('match.age') }}</span>
+                <span class="text-gray-900 dark:text-white">{{ localUser?.age || t('profile.notSpecified') }}</span>
               </div>
               <div class="sm:col-span-2">
-                <span class="text-gray-500 dark:text-gray-400 text-sm block">Description</span>
-                <p class="text-gray-900 dark:text-white mt-1 whitespace-pre-wrap">{{ localUser?.description || 'No description yet.' }}</p>
+                <span class="text-gray-500 dark:text-gray-400 text-sm block">{{ t('profile.description') }}</span>
+                <p class="text-gray-900 dark:text-white mt-1 whitespace-pre-wrap">{{ localUser?.description || t('profile.noDescriptionYet') }}</p>
               </div>
             </div>
           </div>
@@ -310,20 +312,20 @@ onMounted(async () => {
           <!-- Edit Form -->
           <form v-else @submit.prevent="updateProfile" class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('common.name') }}</label>
               <input v-model="profileForm.name" type="text" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Age</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('match.age') }}</label>
               <input v-model.number="profileForm.age" type="number" min="1" max="120" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('profile.description') }}</label>
               <textarea v-model="profileForm.description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
             </div>
             <div class="flex justify-end space-x-3">
-              <button type="button" @click="isEditingProfile = false" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Cancel</button>
-              <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">Save</button>
+              <button type="button" @click="isEditingProfile = false" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">{{ t('common.cancel') }}</button>
+              <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">{{ t('common.save') }}</button>
             </div>
           </form>
         </div>
@@ -332,12 +334,12 @@ onMounted(async () => {
       <!-- Sports Section -->
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 transition-colors duration-200">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-white">My Sports</h2>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ t('profile.mySports') }}</h2>
           <button 
             @click="isAddSportModalOpen = true"
             class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            <font-awesome-icon icon="plus" class="mr-1" /> Add Sport
+            <font-awesome-icon icon="plus" class="mr-1" /> {{ t('profile.addSport') }}
           </button>
         </div>
 
@@ -347,7 +349,7 @@ onMounted(async () => {
 
         <div v-else-if="userSports.length === 0" class="text-center py-8 text-gray-500 dark:text-gray-400">
           <font-awesome-icon icon="running" class="text-4xl mb-2 text-gray-300 dark:text-gray-600" />
-          <p>You haven't added any sports yet.</p>
+          <p>{{ t('profile.noSportsAdded') }}</p>
         </div>
 
         <div v-else class="space-y-4">
@@ -356,13 +358,13 @@ onMounted(async () => {
               <h3 class="font-medium text-gray-900 dark:text-white">{{ sport.name }}</h3>
               <div v-if="sport.typicalDistanceKm && sport.typicalDistanceKm > 0" class="flex items-center mt-1 text-sm text-gray-500 dark:text-gray-400">
                  <font-awesome-icon icon="map-marker-alt" class="mr-1.5 text-gray-400 dark:text-gray-500" />
-                 <span>Typical distance: {{ sport.typicalDistanceKm }} km</span>
+                 <span>{{ t('profile.typicalDistance') }}: {{ sport.typicalDistanceKm }} km</span>
               </div>
             </div>
             <button 
               @click="sport.sportId && removeSport(sport.sportId)"
               class="ml-4 p-2 text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 transition-colors"
-              title="Remove sport"
+              :title="t('profile.removeSport')"
             >
               <font-awesome-icon icon="trash" />
             </button>
@@ -374,25 +376,25 @@ onMounted(async () => {
     <!-- Add Sport Modal -->
     <BaseModal 
       :is-open="isAddSportModalOpen" 
-      title="Add New Sport"
+      :title="t('profile.addNewSport')"
       @close="isAddSportModalOpen = false"
     >
       <form @submit.prevent="addSport" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Select Sport</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('profile.selectSport') }}</label>
           <select 
             v-model="newSportId" 
             required
             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           >
-            <option value="" disabled>Choose a sport...</option>
+            <option value="" disabled>{{ t('profile.chooseSport') }}</option>
             <option 
               v-for="sport in availableSports" 
               :key="sport.id" 
               :value="sport.id"
               :disabled="userSports.some(us => us.sportId === sport.id)"
             >
-              {{ sport.name }} {{ (sport.typicalDistanceKm && sport.typicalDistanceKm > 0) ? `(${sport.typicalDistanceKm} km)` : '' }} {{ userSports.some(us => us.sportId === sport.id) ? '(Already added)' : '' }}
+              {{ sport.name }} {{ (sport.typicalDistanceKm && sport.typicalDistanceKm > 0) ? `(${sport.typicalDistanceKm} km)` : '' }} {{ userSports.some(us => us.sportId === sport.id) ? `(${t('profile.alreadyAdded')})` : '' }}
             </option>
           </select>
         </div>
@@ -403,7 +405,7 @@ onMounted(async () => {
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
             :disabled="!newSportId"
           >
-            Add Sport
+            {{ t('profile.addSport') }}
           </button>
         </div>
       </form>

@@ -5,6 +5,7 @@ import L from 'leaflet';
 import apiClient from '../api/axios';
 import { useAuthStore } from '../stores/auth';
 import { useToastStore } from '../stores/toast';
+import { useI18n } from 'vue-i18n';
 import type { 
   UserMatchDto, 
   Sport, 
@@ -36,6 +37,7 @@ fixLeafletIcons();
 
 const authStore = useAuthStore();
 const toast = useToastStore();
+const { t } = useI18n();
 
 interface ExtendedUserMatchDto extends UserMatchDto {
     profilePictureUrl?: string | null;
@@ -134,7 +136,7 @@ const getUserLocation = () => {
       },
       (error) => {
         console.error("Error getting location:", error);
-        toast.error("Could not get your location. Using saved location.");
+        toast.error(t('match.locationError'));
         if (authStore.user?.latitude && authStore.user?.longitude) {
             userLocation.value = [authStore.user.latitude, authStore.user.longitude];
             center.value = [authStore.user.latitude, authStore.user.longitude];
@@ -143,7 +145,7 @@ const getUserLocation = () => {
       }
     );
   } else {
-      toast.warning("Geolocation is not supported by your browser.");
+      toast.warning(t('match.geolocationUnsupported'));
       if (authStore.user?.latitude && authStore.user?.longitude) {
           userLocation.value = [authStore.user.latitude, authStore.user.longitude];
           center.value = [authStore.user.latitude, authStore.user.longitude];
@@ -213,7 +215,7 @@ const fetchSports = async () => {
     }
   } catch (error) {
     console.error("Failed to fetch sports", error);
-    toast.error("Failed to load sports list.");
+    toast.error(t('match.loadSportsFailed'));
   }
 };
 
@@ -356,7 +358,7 @@ const fetchMatches = async () => {
 
   } catch (error) {
     console.error("Failed to fetch matches", error);
-    toast.error("Failed to find matches.");
+    toast.error(t('match.noAthletesFound'));
   } finally {
     isLoadingMatches.value = false;
   }
@@ -376,7 +378,7 @@ const sendMatchRequest = async (targetUserId: string) => {
   try {
     await apiClient.post('/Match/request', payload);
     requestStatus.value[targetUserId] = 'sent';
-    toast.success("Match request sent!");
+    toast.success(t('match.matchRequestSent'));
     await fetchMatches(); 
     
     if (selectedUserProfile.value?.id === targetUserId) {
@@ -387,7 +389,7 @@ const sendMatchRequest = async (targetUserId: string) => {
   } catch (error) {
     console.error("Failed to send match request", error);
     requestStatus.value[targetUserId] = 'error';
-    toast.error("Failed to send request.");
+    toast.error(t('match.sendRequestFailed'));
   }
 };
 
@@ -398,7 +400,7 @@ const cancelMatchRequest = async (userId: string, requestId: string) => {
     
     try {
         await apiClient.patch(`/Match/${requestId}/cancel`);
-        toast.success("Request cancelled.");
+        toast.success(t('match.requestCancelled'));
         
         const index = matchedUsers.value.findIndex(u => u.id === userId);
         if (index !== -1) {
@@ -417,7 +419,7 @@ const cancelMatchRequest = async (userId: string, requestId: string) => {
         await fetchRequests(); 
     } catch (error) {
         console.error("Failed to cancel request", error);
-        toast.error("Failed to cancel request.");
+        toast.error(t('match.cancelRequestFailed'));
         requestStatus.value[userId] = 'error';
     }
 };
@@ -446,7 +448,7 @@ const submitTrainingRequest = async () => {
 
     try {
         await apiClient.post('/TrainingRequests', payload);
-        toast.success('Training request sent!');
+        toast.success(t('match.trainingRequestSent'));
         isTrainingModalOpen.value = false;
         isProfileModalOpen.value = false;
     } catch (error) {
@@ -455,7 +457,7 @@ const submitTrainingRequest = async () => {
         if (axiosError.response?.data) {
             console.log('Backend error details:', axiosError.response.data);
         }
-        toast.error('Failed to send training request.');
+        toast.error(t('match.trainingRequestFailed'));
     }
 };
 
@@ -488,7 +490,7 @@ const openUserProfile = async (userId: string) => {
 
     } catch (error) {
         console.error("Failed to fetch user profile", error);
-        toast.error("Failed to load user profile");
+        toast.error(t('match.loadProfileFailed'));
         isProfileModalOpen.value = false;
     } finally {
         isLoadingProfile.value = false;
@@ -544,8 +546,8 @@ onMounted(async () => {
         >
            <l-popup>
                <div class="text-center">
-                   <p>Your search location</p>
-                   <p class="text-xs text-gray-500">(Drag me to change)</p>
+                   <p>{{ t('match.searchLocation') }}</p>
+                   <p class="text-xs text-gray-500">{{ t('match.dragToChange') }}</p>
                </div>
            </l-popup>
         </l-marker>
@@ -563,7 +565,7 @@ onMounted(async () => {
       <!-- Controls -->
       <div class="absolute top-4 right-4 z-[1000] bg-white dark:bg-gray-800 p-3 rounded-lg shadow-md w-64 transition-colors duration-200">
         <div class="mb-3">
-          <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Sport</label>
+          <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">{{ t('match.sport') }}</label>
           <select 
             v-model="selectedSportId" 
             class="block w-full pl-3 pr-10 py-1 text-sm border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md border bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -576,7 +578,7 @@ onMounted(async () => {
         
         <div>
           <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Radius: {{ searchRadiusKm }} km
+            {{ t('match.radius') }}: {{ searchRadiusKm }} km
           </label>
           <input 
             type="range" 
@@ -595,14 +597,14 @@ onMounted(async () => {
         <button 
           @click="openLocationModal"
           class="bg-white dark:bg-gray-800 p-2 rounded-full shadow-md text-indigo-600 dark:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-          title="Set Location Manually"
+          :title="t('match.setManualLocation')"
         >
           <font-awesome-icon :icon="faEdit" class="text-xl" />
         </button>
         <button 
           @click="getUserLocation"
           class="bg-white dark:bg-gray-800 p-2 rounded-full shadow-md text-indigo-600 dark:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-          title="Use My GPS Location"
+          :title="t('match.useGPS')"
         >
           <font-awesome-icon icon="location-arrow" class="text-xl" />
         </button>
@@ -614,7 +616,7 @@ onMounted(async () => {
       <div class="max-w-3xl mx-auto">
         <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
           <font-awesome-icon icon="search" class="mr-2 text-indigo-500 dark:text-indigo-400" />
-          Found Athletes ({{ filteredUsers.length }})
+          {{ t('match.foundAthletes') }} ({{ filteredUsers.length }})
         </h2>
 
         <div v-if="isLoadingMatches" class="flex justify-center py-8">
@@ -622,8 +624,8 @@ onMounted(async () => {
         </div>
 
         <div v-else-if="filteredUsers.length === 0" class="text-center py-8 text-gray-500 dark:text-gray-400">
-          <p>No athletes found nearby for this sport.</p>
-          <p class="text-sm mt-2">Try increasing the radius or changing the sport.</p>
+          <p>{{ t('match.noAthletesFound') }}</p>
+          <p class="text-sm mt-2">{{ t('match.tryChanging') }}</p>
         </div>
 
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -649,14 +651,14 @@ onMounted(async () => {
                   class="px-2 py-0.5 rounded-full text-xs font-medium"
                   :class="user.isAvailableNow ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'"
                 >
-                  {{ user.isAvailableNow ? 'Online' : 'Offline' }}
+                  {{ user.isAvailableNow ? t('common.online') : t('common.offline') }}
                 </span>
               </div>
               
               <div class="text-sm text-gray-600 dark:text-gray-400 mb-3 space-y-1 ml-13"> 
                 <div class="flex items-center">
                    <font-awesome-icon icon="street-view" class="w-4 mr-2 text-gray-400 dark:text-gray-500" />
-                   <span>{{ user.distanceKm?.toFixed(1) }} km away</span>
+                   <span>{{ user.distanceKm?.toFixed(1) }} km {{ t('match.away') }}</span>
                 </div>
               </div>
             </div>
@@ -677,7 +679,7 @@ onMounted(async () => {
                     class="mr-2" 
                   />
                   <font-awesome-icon v-else icon="times" class="mr-2" />
-                  Cancel Request
+                  {{ t('match.cancelRequest') }}
                 </button>
 
                 <!-- Standard Button for other states -->
@@ -715,14 +717,14 @@ onMounted(async () => {
                     class="mr-2" 
                   />
                   
-                  <span v-if="requestStatus[user.id] === 'sent'">Request Sent</span>
-                  <span v-else-if="requestStatus[user.id] === 'sending'">Sending...</span>
+                  <span v-if="requestStatus[user.id] === 'sent'">{{ t('match.requestSent') }}</span>
+                  <span v-else-if="requestStatus[user.id] === 'sending'">{{ t('auth.sending') }}</span>
                   <span v-else-if="user.existingRequestStatus === 'Pending'">
-                      {{ user.isIncoming ? 'Received' : 'Request Pending' }}
+                      {{ user.isIncoming ? t('match.received') : t('match.requestPending') }}
                   </span>
-                  <span v-else-if="user.existingRequestStatus === 'Accepted'">Connected</span>
-                  <span v-else-if="user.existingRequestStatus === 'Rejected'">Rejected</span>
-                  <span v-else>Send Request</span>
+                  <span v-else-if="user.existingRequestStatus === 'Accepted'">{{ t('match.connected') }}</span>
+                  <span v-else-if="user.existingRequestStatus === 'Rejected'">{{ t('match.rejected') }}</span>
+                  <span v-else>{{ t('match.sendRequest') }}</span>
                 </button>
             </div>
           </div>
@@ -733,7 +735,7 @@ onMounted(async () => {
     <!-- User Profile Modal -->
     <BaseModal 
         :is-open="isProfileModalOpen" 
-        title="User Profile"
+        :title="t('match.userProfile')"
         @close="isProfileModalOpen = false"
     >
         <div v-if="isLoadingProfile" class="flex justify-center py-8">
@@ -757,7 +759,7 @@ onMounted(async () => {
                 class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-4"
             >
                 <font-awesome-icon :icon="faCommentDots" class="mr-2" />
-                Send Message
+                {{ t('match.sendMessage') }}
             </button>
 
             <!-- Invite to Training Button -->
@@ -767,7 +769,7 @@ onMounted(async () => {
                 class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mb-4"
             >
                 <font-awesome-icon :icon="faDumbbell" class="mr-2" />
-                Invite to Training
+                {{ t('match.inviteToTraining') }}
             </button>
 
             <!-- Cancel Request Button in Modal -->
@@ -784,7 +786,7 @@ onMounted(async () => {
                     class="mr-2" 
                 />
                 <font-awesome-icon v-else icon="times" class="mr-2" />
-                Cancel Request
+                {{ t('match.cancelRequest') }}
             </button>
 
             <button 
@@ -820,22 +822,22 @@ onMounted(async () => {
                 class="mr-2" 
               />
               
-              <span v-if="requestStatus[selectedUserProfile.id!] === 'sending'">Sending...</span>
+              <span v-if="requestStatus[selectedUserProfile.id!] === 'sending'">{{ t('auth.sending') }}</span>
               <span v-else-if="selectedUserRequestStatus === 'Pending'">
-                  {{ selectedUserIsIncoming ? 'Received' : 'Request Pending' }}
+                  {{ selectedUserIsIncoming ? t('match.received') : t('match.requestPending') }}
               </span>
-              <span v-else-if="selectedUserRequestStatus === 'Rejected'">Rejected</span>
-              <span v-else>Send Match Request</span>
+              <span v-else-if="selectedUserRequestStatus === 'Rejected'">{{ t('match.rejected') }}</span>
+              <span v-else>{{ t('match.sendMatchRequest') }}</span>
             </button>
 
             <div class="text-left bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4 mt-4">
-                <p class="text-sm text-gray-600 dark:text-gray-300 mb-1"><strong>Age:</strong> {{ selectedUserProfile.age || 'N/A' }}</p>
-                <p class="text-sm text-gray-600 dark:text-gray-300"><strong>About:</strong> {{ selectedUserProfile.description || 'No description.' }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-1"><strong>{{ t('match.age') }}:</strong> {{ selectedUserProfile.age || 'N/A' }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-300"><strong>{{ t('match.about') }}:</strong> {{ selectedUserProfile.description || t('match.noDescription') }}</p>
             </div>
 
             <div class="text-left mb-6">
-                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Sports</h4>
-                <div v-if="selectedUserSports.length === 0" class="text-sm text-gray-500 dark:text-gray-400">No sports assigned.</div>
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">{{ t('match.sports') }}</h4>
+                <div v-if="selectedUserSports.length === 0" class="text-sm text-gray-500 dark:text-gray-400">{{ t('match.noSportsAssigned') }}</div>
                 <ul v-else class="space-y-2">
                     <li v-for="sport in selectedUserSports" :key="sport.sportId" class="flex items-center text-sm text-gray-700 dark:text-gray-300">
                         <font-awesome-icon :icon="faRunning" class="mr-2 text-indigo-500 dark:text-indigo-400" />
@@ -850,28 +852,28 @@ onMounted(async () => {
     <!-- Training Request Modal -->
     <BaseModal 
         :is-open="isTrainingModalOpen" 
-        title="Invite to Training"
+        :title="t('match.inviteToTraining')"
         @close="isTrainingModalOpen = false"
     >
         <form @submit.prevent="submitTrainingRequest" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date & Time</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('match.dateTime') }}</label>
                 <div class="flex space-x-2">
                     <input v-model="trainingForm.date" type="date" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
                     <input v-model="trainingForm.time" type="time" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
                 </div>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Location</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('match.location') }}</label>
                 <input v-model="trainingForm.location" type="text" required placeholder="e.g. Central Park" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                <textarea v-model="trainingForm.message" rows="3" placeholder="Optional message..." class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('match.message') }}</label>
+                <textarea v-model="trainingForm.message" rows="3" :placeholder="t('match.optionalMessage')" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
             </div>
             <div class="mt-5 sm:mt-6 flex justify-end space-x-3">
-                <button type="button" @click="isTrainingModalOpen = false" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Cancel</button>
-                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">Send Invite</button>
+                <button type="button" @click="isTrainingModalOpen = false" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">{{ t('common.cancel') }}</button>
+                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">{{ t('match.sendInvite') }}</button>
             </div>
         </form>
     </BaseModal>
@@ -879,21 +881,21 @@ onMounted(async () => {
     <!-- Manual Location Modal -->
     <BaseModal 
         :is-open="isLocationModalOpen" 
-        title="Set Location Manually"
+        :title="t('match.setManualLocation')"
         @close="isLocationModalOpen = false"
     >
         <form @submit.prevent="submitManualLocation" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Latitude</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('match.latitude') }}</label>
                 <input v-model.number="manualLocation.lat" type="number" step="any" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Longitude</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('match.longitude') }}</label>
                 <input v-model.number="manualLocation.lng" type="number" step="any" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div class="mt-5 sm:mt-6 flex justify-end space-x-3">
-                <button type="button" @click="isLocationModalOpen = false" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Cancel</button>
-                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">Set Location</button>
+                <button type="button" @click="isLocationModalOpen = false" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">{{ t('common.cancel') }}</button>
+                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">{{ t('match.setLocation') }}</button>
             </div>
         </form>
     </BaseModal>

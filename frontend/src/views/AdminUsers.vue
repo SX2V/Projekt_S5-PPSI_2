@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import apiClient from '../api/axios';
 import { useToastStore } from '../stores/toast';
+import { useI18n } from 'vue-i18n';
 import type { UserMatchDto, Sport } from '../types/api';
 
 interface AdminUser extends UserMatchDto {
@@ -12,6 +13,7 @@ const users = ref<AdminUser[]>([]);
 const isLoading = ref(false);
 const processingId = ref<string | null>(null);
 const toast = useToastStore();
+const { t } = useI18n();
 
 const fetchUsers = async () => {
   isLoading.value = true;
@@ -20,7 +22,7 @@ const fetchUsers = async () => {
     const sports = sportsResponse.data;
     
     if (sports.length === 0) {
-        toast.warning('No sports found. Add sports to see users.');
+        toast.warning(t('admin.noSportsFound'));
         return;
     }
 
@@ -52,7 +54,7 @@ const fetchUsers = async () => {
 
   } catch (error) {
     console.error('Failed to fetch users', error);
-    toast.error('Failed to load users list');
+    toast.error(t('admin.loadUsersFailed'));
   } finally {
     isLoading.value = false;
   }
@@ -66,15 +68,15 @@ const toggleBlockStatus = async (user: AdminUser) => {
     if (user.isBlocked) {
       await apiClient.patch(`/Users/${user.id}/unblock`);
       user.isBlocked = false;
-      toast.success(`User ${user.name} unblocked`);
+      toast.success(t('admin.userUnblocked', { name: user.name }));
     } else {
       await apiClient.patch(`/Users/${user.id}/block`);
       user.isBlocked = true;
-      toast.success(`User ${user.name} blocked`);
+      toast.success(t('admin.userBlocked', { name: user.name }));
     }
   } catch (error) {
     console.error('Failed to update block status', error);
-    toast.error('Failed to update user status');
+    toast.error(t('admin.updateStatusFailed'));
   } finally {
     processingId.value = null;
   }
@@ -87,7 +89,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">User Management</h2>
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{{ t('admin.userManagement') }}</h2>
 
     <div class="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg transition-colors duration-200">
       <div v-if="isLoading" class="flex justify-center py-12">
@@ -95,24 +97,24 @@ onMounted(() => {
       </div>
 
       <div v-else-if="users.length === 0" class="text-center py-12 text-gray-500 dark:text-gray-400">
-        <p>No users found (assigned to any sport).</p>
-        <p class="text-xs mt-2">Note: Users must have at least one sport assigned to appear here.</p>
+        <p>{{ t('admin.noUsersFound') }}</p>
+        <p class="text-xs mt-2">{{ t('admin.usersNote') }}</p>
       </div>
 
       <table v-else class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
         <thead class="bg-gray-50 dark:bg-gray-700">
           <tr>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-              Name
+              {{ t('common.name') }}
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-              Email
+              {{ t('common.email') }}
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-              Status
+              {{ t('admin.status') }}
             </th>
             <th scope="col" class="relative px-6 py-3">
-              <span class="sr-only">Actions</span>
+              <span class="sr-only">{{ t('common.actions') }}</span>
             </th>
           </tr>
         </thead>
@@ -140,7 +142,7 @@ onMounted(() => {
                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                 :class="user.isBlocked ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'"
               >
-                {{ user.isBlocked ? 'Blocked' : 'Active' }}
+                {{ user.isBlocked ? t('admin.blocked') : t('admin.active') }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -154,7 +156,7 @@ onMounted(() => {
                 </span>
                 <span v-else>
                     <font-awesome-icon :icon="user.isBlocked ? 'unlock' : 'ban'" :class="user.isBlocked ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'" />
-                    <span class="ml-1">{{ user.isBlocked ? 'Unblock' : 'Block' }}</span>
+                    <span class="ml-1">{{ user.isBlocked ? t('admin.unblock') : t('admin.block') }}</span>
                 </span>
               </button>
             </td>

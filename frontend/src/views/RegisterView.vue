@@ -2,11 +2,12 @@
 import { ref, computed } from 'vue';
 import { useAuthStore } from '../stores/auth';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import type { RegisterDto } from '../types/api';
-import { UserRoleEnum } from '../types/enums';
 
 const authStore = useAuthStore();
 const router = useRouter();
+const { t } = useI18n();
 
 const name = ref('');
 const email = ref('');
@@ -27,30 +28,21 @@ const isPasswordValid = computed(() => {
   return hasMinLength && hasUpperCase && hasLowerCase && hasNumber;
 });
 
-const passwordRequirements = computed(() => {
-    const reqs = [];
-    if (password.value.length < 8) reqs.push("At least 8 characters");
-    if (!/[A-Z]/.test(password.value)) reqs.push("One uppercase letter");
-    if (!/[a-z]/.test(password.value)) reqs.push("One lowercase letter");
-    if (!/[0-9]/.test(password.value)) reqs.push("One number");
-    return reqs;
-});
-
 const handleRegister = async () => {
   errorMessage.value = '';
   
   if (!name.value || !email.value || !password.value || !confirmPassword.value) {
-    errorMessage.value = 'Please fill in all fields.';
+    errorMessage.value = t('auth.fillAllFields');
     return;
   }
 
   if (!isPasswordValid.value) {
-      errorMessage.value = 'Password does not meet requirements.';
+      errorMessage.value = t('auth.passwordInvalid');
       return;
   }
 
   if (!passwordsMatch.value) {
-    errorMessage.value = 'Passwords do not match.';
+    errorMessage.value = t('auth.passwordMismatch');
     return;
   }
 
@@ -65,7 +57,7 @@ const handleRegister = async () => {
     await authStore.register(registerData);
     router.push('/login');
   } catch (error) {
-    errorMessage.value = 'Registration failed. Please try again.';
+    errorMessage.value = t('auth.registrationFailed');
   }
 };
 </script>
@@ -75,19 +67,19 @@ const handleRegister = async () => {
     <div class="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg transition-colors duration-200">
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-          Create your account
+          {{ t('auth.createAccountTitle') }}
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-          Already have an account?
+          {{ t('auth.alreadyHaveAccount') }}
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" @click.prevent="router.push('/login')">
-            Sign in
+            {{ t('auth.signIn') }}
           </a>
         </p>
       </div>
       <form class="mt-8 space-y-6" @submit.prevent="handleRegister">
         <div class="rounded-md shadow-sm -space-y-px">
           <div class="relative">
-            <label for="name" class="sr-only">Name</label>
+            <label for="name" class="sr-only">{{ t('common.name') }}</label>
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <font-awesome-icon icon="user" class="text-gray-400 dark:text-gray-500" />
             </div>
@@ -98,11 +90,11 @@ const handleRegister = async () => {
               required
               v-model="name"
               class="appearance-none rounded-none rounded-t-md relative block w-full px-3 py-2 pl-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="Name"
+              :placeholder="t('common.name')"
             />
           </div>
           <div class="relative">
-            <label for="email-address" class="sr-only">Email address</label>
+            <label for="email-address" class="sr-only">{{ t('common.email') }}</label>
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <font-awesome-icon icon="envelope" class="text-gray-400 dark:text-gray-500" />
             </div>
@@ -114,11 +106,11 @@ const handleRegister = async () => {
               required
               v-model="email"
               class="appearance-none relative block w-full px-3 py-2 pl-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="Email address"
+              :placeholder="t('common.email')"
             />
           </div>
           <div class="relative">
-            <label for="password" class="sr-only">Password</label>
+            <label for="password" class="sr-only">{{ t('common.password') }}</label>
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <font-awesome-icon icon="lock" class="text-gray-400 dark:text-gray-500" />
             </div>
@@ -130,11 +122,11 @@ const handleRegister = async () => {
               required
               v-model="password"
               class="appearance-none relative block w-full px-3 py-2 pl-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="Password"
+              :placeholder="t('common.password')"
             />
           </div>
           <div class="relative">
-            <label for="confirm-password" class="sr-only">Confirm Password</label>
+            <label for="confirm-password" class="sr-only">{{ t('common.confirmPassword') }}</label>
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <font-awesome-icon icon="lock" class="text-gray-400 dark:text-gray-500" />
             </div>
@@ -146,19 +138,19 @@ const handleRegister = async () => {
               required
               v-model="confirmPassword"
               class="appearance-none rounded-none rounded-b-md relative block w-full px-3 py-2 pl-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="Confirm Password"
+              :placeholder="t('common.confirmPassword')"
             />
           </div>
         </div>
 
         <!-- Password Requirements Hint -->
         <div v-if="password && !isPasswordValid" class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            <p>Password must contain:</p>
+            <p>{{ t('auth.passwordRequirements') }}</p>
             <ul class="list-disc list-inside pl-2">
-                <li :class="{'text-green-600': password.length >= 8, 'text-red-500': password.length < 8}">At least 8 characters</li>
-                <li :class="{'text-green-600': /[A-Z]/.test(password), 'text-red-500': !/[A-Z]/.test(password)}">One uppercase letter</li>
-                <li :class="{'text-green-600': /[a-z]/.test(password), 'text-red-500': !/[a-z]/.test(password)}">One lowercase letter</li>
-                <li :class="{'text-green-600': /[0-9]/.test(password), 'text-red-500': !/[0-9]/.test(password)}">One number</li>
+                <li :class="{'text-green-600': password.length >= 8, 'text-red-500': password.length < 8}">{{ t('auth.reqLength') }}</li>
+                <li :class="{'text-green-600': /[A-Z]/.test(password), 'text-red-500': !/[A-Z]/.test(password)}">{{ t('auth.reqUpper') }}</li>
+                <li :class="{'text-green-600': /[a-z]/.test(password), 'text-red-500': !/[a-z]/.test(password)}">{{ t('auth.reqLower') }}</li>
+                <li :class="{'text-green-600': /[0-9]/.test(password), 'text-red-500': !/[0-9]/.test(password)}">{{ t('auth.reqNumber') }}</li>
             </ul>
         </div>
 
@@ -176,7 +168,7 @@ const handleRegister = async () => {
               <font-awesome-icon v-if="!authStore.isLoading" icon="user-plus" class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 dark:text-indigo-300 dark:group-hover:text-indigo-200" />
               <font-awesome-icon v-else icon="spinner" spin class="h-5 w-5 text-indigo-500 dark:text-indigo-300" />
             </span>
-            {{ authStore.isLoading ? 'Creating account...' : 'Create account' }}
+            {{ authStore.isLoading ? t('auth.creatingAccount') : t('auth.createAccount') }}
           </button>
         </div>
 
@@ -187,7 +179,7 @@ const handleRegister = async () => {
             </div>
             <div class="relative flex justify-center text-sm">
               <span class="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-                Or sign up with
+                {{ t('auth.continueWith') }}
               </span>
             </div>
           </div>
@@ -195,14 +187,14 @@ const handleRegister = async () => {
           <div class="mt-6 grid grid-cols-2 gap-3">
             <div>
               <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <span class="sr-only">Sign up with Facebook</span>
+                <span class="sr-only">{{ t('auth.signUpFacebook') }}</span>
                 <font-awesome-icon :icon="['fab', 'facebook']" class="h-5 w-5 text-blue-600" />
               </a>
             </div>
 
             <div>
               <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <span class="sr-only">Sign up with Strava</span>
+                <span class="sr-only">{{ t('auth.signUpStrava') }}</span>
                 <font-awesome-icon :icon="['fab', 'strava']" class="h-5 w-5 text-orange-600" />
               </a>
             </div>

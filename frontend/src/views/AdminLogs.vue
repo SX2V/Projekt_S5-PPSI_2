@@ -2,10 +2,12 @@
 import { ref, onMounted } from 'vue';
 import apiClient from '../api/axios';
 import { useToastStore } from '../stores/toast';
+import { useI18n } from 'vue-i18n';
 
 const logs = ref<any[]>([]);
 const isLoading = ref(false);
 const toast = useToastStore();
+const { t } = useI18n();
 
 const fetchLogs = async () => {
   isLoading.value = true;
@@ -14,7 +16,7 @@ const fetchLogs = async () => {
     logs.value = response.data;
   } catch (error) {
     console.error('Failed to fetch logs', error);
-    toast.error('Failed to load logs');
+    toast.error(t('admin.loadLogsFailed'));
   } finally {
     isLoading.value = false;
   }
@@ -36,13 +38,13 @@ onMounted(() => {
 <template>
   <div>
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">System Logs</h2>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ t('admin.systemLogs') }}</h2>
       <button 
         @click="fetchLogs"
         class="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none"
       >
         <font-awesome-icon icon="sync" class="mr-2" />
-        Refresh
+        {{ t('common.refresh') }}
       </button>
     </div>
 
@@ -52,7 +54,7 @@ onMounted(() => {
       </div>
 
       <div v-else-if="logs.length === 0" class="text-center py-12 text-gray-500 dark:text-gray-400">
-        <p>No logs found.</p>
+        <p>{{ t('admin.loadLogsFailed') }}</p>
       </div>
 
       <div v-else class="flex flex-col">
@@ -63,7 +65,7 @@ onMounted(() => {
                 <thead class="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                      Log Entry
+                      {{ t('admin.logEntry') }}
                     </th>
                   </tr>
                 </thead>

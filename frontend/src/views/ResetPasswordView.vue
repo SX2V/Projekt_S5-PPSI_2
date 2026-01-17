@@ -3,11 +3,13 @@ import { ref, computed, onMounted } from 'vue';
 import apiClient from '../api/axios';
 import { useRouter, useRoute } from 'vue-router';
 import { useToastStore } from '../stores/toast';
+import { useI18n } from 'vue-i18n';
 import type { ResetPasswordDto } from '../types/api';
 
 const router = useRouter();
 const route = useRoute();
 const toast = useToastStore();
+const { t } = useI18n();
 
 const password = ref('');
 const confirmPassword = ref('');
@@ -24,12 +26,12 @@ const handleResetPassword = async () => {
   if (!password.value || !token.value) return;
   
   if (!isPasswordValid.value) {
-      toast.error('Password does not meet requirements.');
+      toast.error(t('auth.passwordInvalid'));
       return;
   }
 
   if (!passwordsMatch.value) {
-      toast.error('Passwords do not match.');
+      toast.error(t('auth.passwordMismatch'));
       return;
   }
   
@@ -41,11 +43,11 @@ const handleResetPassword = async () => {
 
   try {
     await apiClient.post('/auth/reset-password', payload);
-    toast.success('Password has been reset successfully.');
+    toast.success(t('auth.resetSuccess'));
     setTimeout(() => router.push('/login'), 2000);
   } catch (error) {
     console.error('Failed to reset password', error);
-    toast.error('Failed to reset password. Token might be invalid or expired.');
+    toast.error(t('auth.resetFailed'));
   } finally {
     isLoading.value = false;
   }
@@ -56,7 +58,7 @@ onMounted(() => {
     if (tokenParam) {
         token.value = tokenParam as string;
     } else {
-        toast.error('Missing reset token.');
+        toast.error(t('auth.missingToken'));
     }
 });
 </script>
@@ -66,13 +68,13 @@ onMounted(() => {
     <div class="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg transition-colors duration-200">
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-          Set new password
+          {{ t('auth.setNewPassword') }}
         </h2>
       </div>
       <form class="mt-8 space-y-6" @submit.prevent="handleResetPassword">
         <div class="rounded-md shadow-sm -space-y-px">
           <div class="relative">
-            <label for="password" class="sr-only">New Password</label>
+            <label for="password" class="sr-only">{{ t('auth.newPassword') }}</label>
             <input
               id="password"
               name="password"
@@ -81,11 +83,11 @@ onMounted(() => {
               required
               v-model="password"
               class="appearance-none rounded-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="New Password"
+              :placeholder="t('auth.newPassword')"
             />
           </div>
           <div class="relative">
-            <label for="confirm-password" class="sr-only">Confirm New Password</label>
+            <label for="confirm-password" class="sr-only">{{ t('auth.confirmNewPassword') }}</label>
             <input
               id="confirm-password"
               name="confirm-password"
@@ -94,19 +96,19 @@ onMounted(() => {
               required
               v-model="confirmPassword"
               class="appearance-none rounded-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-              placeholder="Confirm New Password"
+              :placeholder="t('auth.confirmNewPassword')"
             />
           </div>
         </div>
 
         <!-- Password Requirements Hint -->
         <div v-if="password && !isPasswordValid" class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            <p>Password must contain:</p>
+            <p>{{ t('auth.passwordRequirements') }}</p>
             <ul class="list-disc list-inside pl-2">
-                <li :class="{'text-green-600 dark:text-green-400': password.length >= 8, 'text-red-500 dark:text-red-400': password.length < 8}">At least 8 characters</li>
-                <li :class="{'text-green-600 dark:text-green-400': /[A-Z]/.test(password), 'text-red-500 dark:text-red-400': !/[A-Z]/.test(password)}">One uppercase letter</li>
-                <li :class="{'text-green-600 dark:text-green-400': /[a-z]/.test(password), 'text-red-500 dark:text-red-400': !/[a-z]/.test(password)}">One lowercase letter</li>
-                <li :class="{'text-green-600 dark:text-green-400': /[0-9]/.test(password), 'text-red-500 dark:text-red-400': !/[0-9]/.test(password)}">One number</li>
+                <li :class="{'text-green-600 dark:text-green-400': password.length >= 8, 'text-red-500 dark:text-red-400': password.length < 8}">{{ t('auth.reqLength') }}</li>
+                <li :class="{'text-green-600 dark:text-green-400': /[A-Z]/.test(password), 'text-red-500 dark:text-red-400': !/[A-Z]/.test(password)}">{{ t('auth.reqUpper') }}</li>
+                <li :class="{'text-green-600 dark:text-green-400': /[a-z]/.test(password), 'text-red-500 dark:text-red-400': !/[a-z]/.test(password)}">{{ t('auth.reqLower') }}</li>
+                <li :class="{'text-green-600 dark:text-green-400': /[0-9]/.test(password), 'text-red-500 dark:text-red-400': !/[0-9]/.test(password)}">{{ t('auth.reqNumber') }}</li>
             </ul>
         </div>
 
@@ -120,7 +122,7 @@ onMounted(() => {
               <font-awesome-icon v-if="!isLoading" icon="lock" class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 dark:text-indigo-300 dark:group-hover:text-indigo-200" />
               <font-awesome-icon v-else icon="spinner" spin class="h-5 w-5 text-indigo-500 dark:text-indigo-300" />
             </span>
-            {{ isLoading ? 'Resetting...' : 'Reset Password' }}
+            {{ isLoading ? t('auth.resetting') : t('auth.resetPassword') }}
           </button>
         </div>
       </form>
